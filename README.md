@@ -1,59 +1,34 @@
-# better-youtube-playlists
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-An improved user experience for anyone who likes to listen to music using Youtube playlists but finds Youtube's current implementation lacking. 
+## Getting Started
 
-## Requirements
+First, run the development server:
 
-### Playlist List
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-* Playlist UI
-* Default: Message prompting user to add a playlist. Message disappears if more than one item in the list
-* Add playlist
-	- On click, should raise a modal asking for the list url of a youtube playlist
-	- Adding a list id and selecting the add button should add a playlist to the list of playlists
-	- Selecting cancel button or clicking outside of the model should close the modal
-	- Attempting to add an invalid video url should show an error prompt
-* Select playlist
-	- Should populate the playlist description and playlist items
-	- Should reset configurations of all operations to default
-	- Should reset youtube video iframe to default
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Playlist Items
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-* Items UI
-* Default: Empty container
-* List playlist items of selected playlist
-	- Item number, thumbnail, video title, video length
-* Scroll through items
-* Selecting an item highlights it
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-### Video Player
-* Default: show a graphic and prompt to add a playlist and select an item
-* On playlist item select: display and play video corresponding to selected item
-* On video end: move to the next playlist item
-* On playlist end: stop
+## Learn More
 
-### Playlist Details
+To learn more about Next.js, take a look at the following resources:
 
-* Default: title only, No Playlist Selected
-* On playlist selection: Show title, owner and number of videos
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Playlist Operations
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-* Shuffle: At the end of every video
-	- Randomly select a new playlist item at the end of every video
-	- Move list scroll down to the selected video
-* Loop: At the end of the playlist, loop back to the first video in the playlist
-* Search:
-	- If input blank, return the whole list
-	- If input not blank, return all items in the list that contains a word that matches the input
-	- When a video is selected, reset the search to show the whole list, set the iframe to be the selected video, empty the input box, scroll to selected video in list.
+## Deploy on Vercel
 
-### Stretch Goals
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-* Mobile UI
-* Contact details
-* Ads
-* Merged playlists
-* Individual video looping?
-* Keyboard shortcuts if possible
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
