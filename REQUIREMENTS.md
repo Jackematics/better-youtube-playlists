@@ -26,6 +26,7 @@ An improved user experience for anyone who likes to listen to music using Youtub
 	- Item number, thumbnail, video title, video length
 * Scroll through items
 * Selecting an item highlights it
+* Playlist titles beyond a certain character length move to the next line
 
 ### Video Player
 * Default: show a graphic and prompt to add a playlist and select an item

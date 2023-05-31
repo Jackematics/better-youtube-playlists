@@ -4,11 +4,16 @@
 
 :root {
   --background-dark-blue: #011F4B;
-  --container-dark-blue: #03396C;
-  --container-light-blue: #005B96;
-  --highlight-blue: #B3CDE0;
-  --accent-black: #000000;
-  --bright-white: #FFFFFF;
+}
+
+@layer components {
+  .text-shadow-black {
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  }
+
+  .text-shadow-white {
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+  }
 }
 
 body {

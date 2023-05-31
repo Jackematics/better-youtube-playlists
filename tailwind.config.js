@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -6,6 +5,14 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: {
+      "background-dark-blue": '#011F4B',
+      "container-dark-blue": '#03396C',
+      "container-light-blue": '#005B96',
+      "highlight-blue": '#B3CDE0',
+      "accent-black": '#000000',
+      "white": '#FFFFFF',
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
