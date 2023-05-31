@@ -10,7 +10,7 @@ module.exports = {
       "container-dark-blue": '#03396C',
       "container-light-blue": '#005B96',
       "highlight-blue": '#B3CDE0',
-      "accent-black": '#000000',
+      "black": '#000000',
       "white": '#FFFFFF',
     },
     extend: {
