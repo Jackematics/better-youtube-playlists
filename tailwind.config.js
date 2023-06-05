@@ -13,6 +13,8 @@ module.exports = {
       "hover-highlight-blue": '#B3CDE0',
       "button-highlight-blue": '#819FB5',
       "button-select-blue": '#5F7687',
+      "confirm-green": "#2FA71B",
+      "cancel-red": "#BD342B",
       "black": '#000000',
       "white": '#FFFFFF',
     },

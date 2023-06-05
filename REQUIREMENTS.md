@@ -6,7 +6,8 @@ An improved user experience for anyone who likes to listen to music using Youtub
 
 ### Playlist List
 
-* Playlist UI
+* PlaylistList UI
+* Add Playlist Modal UI
 * Default: Message prompting user to add a playlist. Message disappears if more than one item in the list
 * Add playlist
 	- On click, should raise a modal asking for the list url of a youtube playlist
