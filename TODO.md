@@ -6,8 +6,8 @@ An improved user experience for anyone who likes to listen to music using Youtub
 
 ### Playlist List
 
-* PlaylistList UI
-* Add Playlist Modal UI
+* PlaylistList UI (Desktop) :white_check_mark:
+* Add Playlist Modal UI (Desktop) :white_check_mark:
 * Default: Message prompting user to add a playlist. Message disappears if more than one item in the list
 * Add playlist
 	- On click, should raise a modal asking for the list url of a youtube playlist

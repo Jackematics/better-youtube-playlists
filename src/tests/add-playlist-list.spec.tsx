@@ -13,34 +13,49 @@ describe('When attempting to add a new playlist to the playlist list', () => {
       expect(addPlaylistModal).toHaveClass('hidden')
     })
     
+    it('should open when the Add Playlist button is selected', () => {
+      render(
+        <Home />
+      )
+  
+      const addPlaylistModal = screen.getByTestId('add-playlist-modal-wrapper')
+      const addPlaylistButton = screen.getByTestId("add-playlist-button")
+  
+      fireEvent.click(addPlaylistButton);
+  
+      expect(addPlaylistModal).not.toHaveClass('hidden')
+    })
+  
+    it('should close the modal if anywhere outside the modal is selected', () => {
+      render(
+        <Home />
+      )
+  
+      const addPlaylistModal = screen.getByTestId('add-playlist-modal-wrapper')
+      const addPlaylistButton = screen.getByTestId("add-playlist-button")
+      const outsideModalElement = screen.getByText("Playlists")
+  
+      fireEvent.click(addPlaylistButton);
+      fireEvent.click(outsideModalElement)
+  
+      expect(addPlaylistModal).toHaveClass('hidden')
+    })
+
+    it('should close the modal when cancel is clicked', () => {
+      render(
+        <Home />
+      )
+  
+      const addPlaylistModal = screen.getByTestId('add-playlist-modal-wrapper')
+      const addPlaylistButton = screen.getByTestId("add-playlist-button")
+      const cancelButton = screen.getByRole("button", {name: /Cancel/i })
+  
+      fireEvent.click(addPlaylistButton);
+      fireEvent.click(cancelButton)
+  
+      expect(addPlaylistModal).toHaveClass('hidden')
+    })
   })
 
 
-  it('should open when the Add Playlist button is selected', () => {
-    render(
-      <Home />
-    )
-
-    const addPlaylistModal = screen.getByTestId('add-playlist-modal-wrapper')
-    const addPlaylistButton = screen.getByTestId("add-playlist-button")
-
-    fireEvent.click(addPlaylistButton);
-
-    expect(addPlaylistModal).not.toHaveClass('hidden')
-  })
-
-  it('should close the modal if anywhere outside the modal is selected', () => {
-    render(
-      <Home />
-    )
-
-    const addPlaylistModal = screen.getByTestId('add-playlist-modal-wrapper')
-    const addPlaylistButton = screen.getByTestId("add-playlist-button")
-    const outsideModalElement = screen.getByText("Playlists")
-
-    fireEvent.click(addPlaylistButton);
-    fireEvent.click(outsideModalElement)
-
-    expect(addPlaylistModal).toHaveClass('hidden')
-  })
 })
