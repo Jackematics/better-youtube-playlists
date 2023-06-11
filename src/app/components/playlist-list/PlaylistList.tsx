@@ -26,7 +26,6 @@ const PlaylistList = ({openAddPlaylistModalCallback}: PlaylistListProps) => {
                     <button 
                         className="absolute bottom-0 left-0 w-5/6 h-11 ml-5 mb-4 rounded-lg border-2 flex bg-container-light-blue hover:bg-button-highlight-blue focus:bg-button-select-blue"
                         onClick={openAddPlaylistModalCallback}
-                        data-testid="add-playlist-button"
                     >
                         <div className="w-10 h-10 bg-white rounded-lg border-2 flex items-center justify-center">
                             <Image

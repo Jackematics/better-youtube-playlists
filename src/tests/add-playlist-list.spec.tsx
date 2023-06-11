@@ -19,7 +19,7 @@ describe('When attempting to add a new playlist to the playlist list', () => {
       )
   
       const addPlaylistModal = screen.getByTestId('add-playlist-modal-wrapper')
-      const addPlaylistButton = screen.getByTestId("add-playlist-button")
+      const addPlaylistButton = screen.getByRole("button", {name: /Add Playlist/i})
   
       fireEvent.click(addPlaylistButton);
   
@@ -32,7 +32,7 @@ describe('When attempting to add a new playlist to the playlist list', () => {
       )
   
       const addPlaylistModal = screen.getByTestId('add-playlist-modal-wrapper')
-      const addPlaylistButton = screen.getByTestId("add-playlist-button")
+      const addPlaylistButton = screen.getByRole("button", {name: /Add Playlist/i})
       const outsideModalElement = screen.getByText("Playlists")
   
       fireEvent.click(addPlaylistButton);
@@ -47,7 +47,7 @@ describe('When attempting to add a new playlist to the playlist list', () => {
       )
   
       const addPlaylistModal = screen.getByTestId('add-playlist-modal-wrapper')
-      const addPlaylistButton = screen.getByTestId("add-playlist-button")
+      const addPlaylistButton = screen.getByRole("button", {name: /Add Playlist/i})
       const cancelButton = screen.getByRole("button", {name: /Cancel/i })
   
       fireEvent.click(addPlaylistButton);
