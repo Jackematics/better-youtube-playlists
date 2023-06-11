@@ -15,6 +15,8 @@ module.exports = {
       "button-select-blue": '#5F7687',
       "confirm-green": "#2FA71B",
       "cancel-red": "#BD342B",
+      "cancel-hover-red": "#9E2720",
+      "cancel-active-red": "#7A231D",
       "black": '#000000',
       "white": '#FFFFFF',
     },

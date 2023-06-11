@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 
 type PlaylistListProps = {
@@ -24,7 +22,7 @@ const PlaylistList = ({openAddPlaylistModalCallback}: PlaylistListProps) => {
                 </ul>
                 <div className="flex items-center justify-center">
                     <button 
-                        className="absolute bottom-0 left-0 w-5/6 h-11 ml-5 mb-4 rounded-lg border-2 flex bg-container-light-blue hover:bg-button-highlight-blue focus:bg-button-select-blue"
+                        className="absolute bottom-0 left-0 w-5/6 h-11 ml-5 mb-4 rounded-lg border-2 flex bg-container-light-blue hover:bg-button-highlight-blue active:bg-button-select-blue"
                         onClick={openAddPlaylistModalCallback}
                     >
                         <div className="w-10 h-10 bg-white rounded-lg border-2 flex items-center justify-center">

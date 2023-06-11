@@ -1,4 +1,3 @@
-'use-client'
 type AddPlaylistModalProps = {
     closePlaylistModalCallback: () => void;
 }
@@ -19,9 +18,11 @@ const AddPlaylistModal = ({closePlaylistModalCallback}: AddPlaylistModalProps) =
                 <div className="flex justify-center items-center mt-5">
                     <button className="w-36 h-14 bg-confirm-green border-2 rounded-lg text-3xl font-bold">Add</button>
                     <button 
-                        className="w-36 h-14 bg-cancel-red border-2 rounded-lg text-3xl font-bold ml-16"
+                        className="w-36 h-14 bg-cancel-red border-2 rounded-lg text-3xl font-bold ml-16 hover:bg-cancel-hover-red active:bg-cancel-active-red"
                         onClick={closePlaylistModalCallback}
-                        >Cancel</button>
+                    >
+                        Cancel
+                    </button>
                 </div>
             </div>
         </>

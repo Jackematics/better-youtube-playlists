@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from "react";
-import AddPlaylistModal from "./components/playlist-list/AddPlaylistModal";
-import PlaylistList from "./components/playlist-list/PlaylistList";
+import AddPlaylistModal from "./components/client/playlist-list/AddPlaylistModal";
+import PlaylistList from "./components/client/playlist-list/PlaylistList";
+import YoutubePlaylistDataFetcher from "./components/server/YoutubePlaylistDataFetcher";
 
 const Home = () => {
   const [addPlaylistModalOpen, setAddPlaylistModalOpen] = useState<boolean>(false);
@@ -11,7 +12,7 @@ const Home = () => {
     setAddPlaylistModalOpen(true)
   }
 
-  const closeAddPlaylistModalModal = (): void => {
+  const closeAddPlaylistModal = (): void => {
     if (addPlaylistModalOpen) {
       setAddPlaylistModalOpen(false)
     }
@@ -19,11 +20,11 @@ const Home = () => {
 
   return (
     <main className="bg-background-dark-blue">
-      <div className={addPlaylistModalOpen ? "modal-backdrop" : ""} onClick={closeAddPlaylistModalModal}>
-        <PlaylistList openAddPlaylistModalCallback={openAddPlaylistModal} />
+      <div className={addPlaylistModalOpen ? "modal-backdrop" : ""} onClick={closeAddPlaylistModal}>
+        <YoutubePlaylistDataFetcher openAddPlaylistModalCallback={openAddPlaylistModal} />
       </div>
       <div className={addPlaylistModalOpen ? "" : "hidden"} data-testid='add-playlist-modal-wrapper'>
-        <AddPlaylistModal closePlaylistModalCallback={closeAddPlaylistModalModal} />
+        <AddPlaylistModal closePlaylistModalCallback={closeAddPlaylistModal} />
       </div>
     </main>
   )

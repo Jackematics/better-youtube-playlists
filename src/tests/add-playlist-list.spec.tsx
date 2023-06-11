@@ -56,6 +56,4 @@ describe('When attempting to add a new playlist to the playlist list', () => {
       expect(addPlaylistModal).toHaveClass('hidden')
     })
   })
-
-
 })

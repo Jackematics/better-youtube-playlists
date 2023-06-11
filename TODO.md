@@ -10,9 +10,9 @@ An improved user experience for anyone who likes to listen to music using Youtub
 * Add Playlist Modal UI (Desktop) :white_check_mark:
 * Default: Message prompting user to add a playlist. Message disappears if more than one item in the list
 * Add playlist
-	- On click, should raise a modal asking for the list url of a youtube playlist
+	- On click, should raise a modal asking for the list url of a youtube playlist :white_check_mark:
 	- Adding a list id and selecting the add button should add a playlist to the list of playlists
-	- Selecting cancel button or clicking outside of the model should close the modal
+	- Selecting cancel button or clicking outside of the model should close the modal :white_check_mark:
 	- Attempting to add an invalid video url should show an error prompt
 * Select playlist
 	- Should populate the playlist description and playlist items
