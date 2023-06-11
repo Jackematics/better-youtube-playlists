@@ -7,14 +7,20 @@ import PlaylistList from "./components/playlist-list/PlaylistList";
 const Home = () => {
   const [addPlaylistModalOpen, setAddPlaylistModalOpen] = useState<boolean>(false);
 
-  const handleAddPlaylist = (): void => {
-      setAddPlaylistModalOpen(!addPlaylistModalOpen)
+  const handleToggleAddPlaylistModal = (): void => {
+    setAddPlaylistModalOpen(!addPlaylistModalOpen)
+  }
+
+  const handleCloseAddPlaylistModalModal = (): void => {
+    if (addPlaylistModalOpen) {
+      setAddPlaylistModalOpen(false)
+    }
   }
 
   return (
     <main className="bg-background-dark-blue">
-      <div className={addPlaylistModalOpen ? "modal-backdrop" : ""}>
-        <PlaylistList addPlaylistCallback={handleAddPlaylist} />
+      <div className={addPlaylistModalOpen ? "modal-backdrop" : ""} onClick={handleCloseAddPlaylistModalModal}>
+        <PlaylistList openAddPlaylistModalCallback={handleToggleAddPlaylistModal} />
       </div>
       <div className={addPlaylistModalOpen ? "" : "hidden"} data-testid='add-playlist-modal-wrapper'>
         <AddPlaylistModal />
