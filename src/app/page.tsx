@@ -4,6 +4,7 @@ import { useState } from "react";
 import AddPlaylistModal from "./components/playlist-list/AddPlaylistModal";
 import PlaylistList from "./components/playlist-list/PlaylistList";
 import useYoutubeDataFetcher from "./hooks/useYoutubeDataFetcher";
+import { ValidationResult } from "./types/validation-types";
 
 const Home = () => {
   const [addPlaylistModalOpen, setAddPlaylistModalOpen] =
@@ -20,15 +21,19 @@ const Home = () => {
     }
   };
 
-  const handleAddPlaylistId = (playlistId: string) => {
-    addPlaylistId(playlistId);
+  const handleAddPlaylistId = async (
+    playlistId: string
+  ): Promise<ValidationResult> => {
+    const validationResult = await addPlaylistId(playlistId);
+    return validationResult;
   };
 
   return (
     <main className="bg-background-dark-blue">
       <div
-        className={addPlaylistModalOpen ? "modal-backdrop" : ""}
-        onClick={closeAddPlaylistModal}
+        className={
+          addPlaylistModalOpen ? "modal-backdrop pointer-events-none" : ""
+        }
       >
         <PlaylistList
           openAddPlaylistModalCallback={openAddPlaylistModal}

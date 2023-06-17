@@ -1,14 +1,14 @@
 import { useState } from "react";
 import {
-  MetadataItem,
   PlaylistMetadata,
   YoutubeMetadataResponse,
-} from "../youtube-metadata-types";
-import { metadata } from "../layout";
+} from "../types/youtube-metadata-types";
 import Config from "../config";
+import FetchHandler from "../handlers/fetch-handler";
+import { ValidationResult } from "../types/validation-types";
 
 type YoutubeDataFetcher = {
-  addPlaylistId: (playlistId: string) => void;
+  addPlaylistId: (playlistId: string) => Promise<ValidationResult>;
   playlistMetadataCollection: PlaylistMetadata[];
 };
 
@@ -17,21 +17,26 @@ const useYoutubeDataFetcher = (): YoutubeDataFetcher => {
     PlaylistMetadata[]
   >([]);
 
-  const addPlaylistId = async (playlistId: string) => {
-    const res: Response = await fetch(
+  const addPlaylistId = async (
+    playlistId: string
+  ): Promise<ValidationResult> => {
+    const youtubeMetadata = (await FetchHandler.fetch(
       `https://youtube.googleapis.com/youtube/v3/playlists?part=snippet&id=${playlistId}&key=${Config.youtubeApiKey}&maxResults=5`
-    );
+    )) as YoutubeMetadataResponse;
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
+    if (youtubeMetadata.items.length > 0) {
+      setPlaylistMetadataCollection([
+        ...playlistMetadataCollection,
+        {
+          id: playlistId,
+          title: youtubeMetadata.items[0].snippet.title,
+        },
+      ]);
+
+      return { valid: true, message: "" };
+    } else {
+      return { valid: false, message: "Invalid playlist id" };
     }
-
-    const metadata: YoutubeMetadataResponse = await res.json();
-
-    setPlaylistMetadataCollection([
-      ...playlistMetadataCollection,
-      { id: metadata.items[0].id, title: metadata.items[0].snippet.title },
-    ]);
   };
 
   return { addPlaylistId, playlistMetadataCollection };

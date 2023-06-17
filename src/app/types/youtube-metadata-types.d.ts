@@ -20,6 +20,5 @@ type MetadataItem = {
 };
 
 export type YoutubeMetadataResponse = {
-  pageInfo: PageInfo;
   items: MetadataItem[];
 };

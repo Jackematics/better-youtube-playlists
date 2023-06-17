@@ -1,4 +1,4 @@
-import { PlaylistMetadata } from "@/app/youtube-metadata-types";
+import { PlaylistMetadata } from "../../types/youtube-metadata-types";
 import Image from "next/image";
 
 type PlaylistListProps = {

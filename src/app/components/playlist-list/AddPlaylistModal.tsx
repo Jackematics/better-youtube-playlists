@@ -1,9 +1,10 @@
 "use-client";
 
+import { ValidationResult } from "@/app/types/validation-types";
 import { useState } from "react";
 
 type AddPlaylistModalProps = {
-  addPlaylistIdCallback: (playlistId: string) => void;
+  addPlaylistIdCallback: (playlistId: string) => Promise<ValidationResult>;
   closePlaylistModalCallback: () => void;
 };
 
@@ -12,6 +13,7 @@ const AddPlaylistModal = ({
   closePlaylistModalCallback,
 }: AddPlaylistModalProps) => {
   const [playlistId, setPlaylistId] = useState<string>("");
+  const [validationMessage, setValidationMessage] = useState<string>("");
 
   const handlePlaylistIdInputChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -19,14 +21,28 @@ const AddPlaylistModal = ({
     setPlaylistId(e.currentTarget.value);
   };
 
-  const handleAddClick = () => {
-    addPlaylistIdCallback(playlistId);
+  const handleAddClick = async () => {
+    const validationResult = await addPlaylistIdCallback(playlistId);
+
+    if (validationResult.valid) {
+      setValidationMessage("");
+      closePlaylistModalCallback();
+    } else {
+      setValidationMessage(validationResult.message);
+    }
+
+    setPlaylistId("");
+  };
+
+  const handleCancelClick = () => {
+    setPlaylistId("");
+    setValidationMessage("");
     closePlaylistModalCallback();
   };
 
   return (
     <>
-      <div className="w-[36rem] h-[21rem] bg-container-dark-blue border-4 fixed top-1/2 left-1/2 translate-center">
+      <div className="w-[36rem] h-[23rem] bg-container-dark-blue border-4 fixed top-1/2 left-1/2 translate-center">
         <h2 className="text-white text-5xl font-bold text-shadow-black mt-5 ml-16">
           Add Playlist
         </h2>
@@ -42,20 +58,26 @@ const AddPlaylistModal = ({
               data-testid="playlist-id-input"
               placeholder="e.g. PLtcWcWdp-TofpVedRiMRoH7rB20gQczgh"
               onChange={handlePlaylistIdInputChange}
+              value={playlistId}
             />
           </div>
         </div>
+        <div className="h-5 mt-1 ml-16">
+          <p className="text-cancel-red text-xl font-bold">
+            {validationMessage}
+          </p>
+        </div>
         <div className="flex justify-center items-center mt-5">
           <button
-            className="w-36 h-14 bg-confirm-green border-2 rounded-lg text-3xl font-bold"
+            className="w-36 h-14 bg-confirm-green border-2 rounded-lg text-3xl font-bold hover:bg-confirm-green-hover active:bg-confirm-green-active"
             data-testid="add-id-button"
             onClick={handleAddClick}
           >
             Add
           </button>
           <button
-            className="w-36 h-14 bg-cancel-red border-2 rounded-lg text-3xl font-bold ml-16 hover:bg-cancel-hover-red active:bg-cancel-active-red"
-            onClick={closePlaylistModalCallback}
+            className="w-36 h-14 bg-cancel-red border-2 rounded-lg text-3xl font-bold ml-16 hover:bg-cancel-red-hover active:bg-cancel-red-active"
+            onClick={handleCancelClick}
           >
             Cancel
           </button>
