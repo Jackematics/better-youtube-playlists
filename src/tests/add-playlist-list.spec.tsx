@@ -147,6 +147,7 @@ describe("When attempting to add a new playlist to the playlist list", () => {
           expect(
             screen.getByText("Invalid playlist id")
           ).not.toBeInTheDocument();
+          expect(screen.getByText("test-playlist-id")).not.toBeInTheDocument();
         });
       });
     });
