@@ -44,15 +44,15 @@ const Home = () => {
           addPlaylistModalOpen ? "modal-backdrop pointer-events-none" : ""
         }`}
       >
-        <div className="flex-initial">
+        <div className="flex-initial w-72 h-[56rem] bg-container-dark-blue m-6 border-4 relative">
           <PlaylistList
             playlistMetadataCollection={playlistMetadataCollection}
             openAddPlaylistModalCallback={openAddPlaylistModal}
             selectPlaylistCallback={handleSelectPlaylist}
           />
         </div>
-        <div className="flex-initial w-[38rem] h-[26rem] bg-black mt-7 mr-7 relative"></div>
-        <div className="flex-initial">
+        <div className="flex-initial min-w-[38rem] h-[26rem] bg-black mt-7 mr-7 relative"></div>
+        <div className="flex-initial w-[54.5rem] h-[18.5rem] bg-container-dark-blue mt-7 mr-7 border-4 relative">
           <PlaylistDescription
             selectedPlaylistMetadata={selectedPlaylistMetadata}
           />

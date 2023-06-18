@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Home from "../app/page";
 import FetchHandler from "../app/handlers/fetch-handler";
+import { addTestPlaylistPath } from "./test-utils";
 
 let originalFetch = FetchHandler.fetch;
 describe("PlaylistList", () => {
@@ -77,17 +78,7 @@ describe("PlaylistList", () => {
     it("should add a new playlist to the playlist list if the Add button is clicked when a valid playlist id is given", () => {
       render(<Home />);
 
-      const addPlaylistButton = screen.getByRole("button", {
-        name: /Add Playlist/i,
-      });
-      const playlistIdInput = screen.getByTestId("playlist-id-input");
-      const addButton = screen.getByTestId("add-id-button");
-
-      fireEvent.click(addPlaylistButton);
-      fireEvent.change(playlistIdInput, {
-        target: { value: "test-playlist-id" },
-      });
-      fireEvent.click(addButton);
+      addTestPlaylistPath();
 
       waitFor(() => {
         expect(screen.getByText("Test Playlist")).toBeInTheDocument();
@@ -148,6 +139,21 @@ describe("PlaylistList", () => {
             screen.getByText("Invalid playlist id")
           ).not.toBeInTheDocument();
           expect(screen.getByText("test-playlist-id")).not.toBeInTheDocument();
+        });
+      });
+
+      it("should show a validation message if a duplicate playlist is added", async () => {
+        render(<Home />);
+
+        await addTestPlaylistPath();
+        await addTestPlaylistPath();
+
+        expect(screen.getAllByText("Test Playlist").length).toBe(1);
+
+        waitFor(() => {
+          expect(
+            screen.getByText("Playlists cannot be duplicated")
+          ).toBeInTheDocument();
         });
       });
     });

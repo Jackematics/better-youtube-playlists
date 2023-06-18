@@ -6,7 +6,7 @@ import {
 import Config from "../config";
 import FetchHandler from "../handlers/fetch-handler";
 import { ValidationResult } from "../types/validation-types";
-import ValidationHandler from "../handlers/validation-handler";
+import PlaylistValidator from "../validators/playlist-validator";
 
 type YoutubeDataFetcher = {
   addPlaylistId: (playlistId: string) => Promise<ValidationResult>;
@@ -25,10 +25,13 @@ const useYoutubeDataFetcher = (): YoutubeDataFetcher => {
       `https://youtube.googleapis.com/youtube/v3/playlists?part=snippet&id=${playlistId}&key=${Config.youtubeApiKey}&maxResults=5`
     )) as YoutubeMetadataResponse;
 
-    const metadataValidationResult =
-      ValidationHandler.validateYoutubeMetadata(youtubeMetadata);
+    const playlistValidationResult = PlaylistValidator.validatePlaylistData(
+      playlistId,
+      playlistMetadataCollection,
+      youtubeMetadata
+    );
 
-    if (metadataValidationResult.valid) {
+    if (playlistValidationResult.valid) {
       setPlaylistMetadataCollection([
         ...playlistMetadataCollection,
         {
@@ -39,7 +42,7 @@ const useYoutubeDataFetcher = (): YoutubeDataFetcher => {
       ]);
     }
 
-    return metadataValidationResult;
+    return playlistValidationResult;
   };
 
   return { addPlaylistId, playlistMetadataCollection };

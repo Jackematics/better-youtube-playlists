@@ -25,13 +25,11 @@ const AddPlaylistModal = ({
     const validationResult = await addPlaylistIdCallback(playlistId);
 
     if (validationResult.valid) {
-      setValidationMessage("");
       closePlaylistModalCallback();
-    } else {
-      setValidationMessage(validationResult.message);
     }
 
     setPlaylistId("");
+    setValidationMessage(validationResult.message);
   };
 
   const handleCancelClick = () => {
