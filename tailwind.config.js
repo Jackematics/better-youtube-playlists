@@ -19,6 +19,7 @@ module.exports = {
       "cancel-red": "#BD342B",
       "cancel-red-hover": "#9E2720",
       "cancel-red-active": "#7A231D",
+      "outline-gray": "#868A8f",
       black: "#000000",
       white: "#FFFFFF",
     },

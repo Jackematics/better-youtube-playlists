@@ -34,6 +34,7 @@ const useYoutubeDataFetcher = (): YoutubeDataFetcher => {
         {
           id: playlistId,
           title: youtubeMetadata.items[0].snippet.title,
+          channelTitle: youtubeMetadata.items[0].snippet.channelTitle,
         },
       ]);
     }

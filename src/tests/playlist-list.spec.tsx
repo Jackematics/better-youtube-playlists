@@ -3,7 +3,7 @@ import Home from "../app/page";
 import FetchHandler from "../app/handlers/fetch-handler";
 
 let originalFetch = FetchHandler.fetch;
-describe("When attempting to add a new playlist to the playlist list", () => {
+describe("PlaylistList", () => {
   beforeEach(() => {
     const mockFetch = jest.fn().mockResolvedValue({
       items: [

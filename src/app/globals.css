@@ -3,12 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background-dark-blue: #011F4B;
+  --background-dark-blue: #011f4b;
 }
 
 @layer components {
   .text-shadow-black {
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  }
+
+  .text-shadow-black-thick {
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
   }
 
   .text-shadow-white {
@@ -20,7 +24,7 @@
   }
 
   .modal-backdrop {
-    opacity: 0.3 !important
+    opacity: 0.3 !important;
   }
 }
 

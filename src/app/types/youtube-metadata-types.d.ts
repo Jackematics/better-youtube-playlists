@@ -1,6 +1,7 @@
 export type PlaylistMetadata = {
   id: string;
   title: string;
+  channelTitle: string;
 };
 
 type PageInfo = {
@@ -10,7 +11,6 @@ type PageInfo = {
 
 type Snippet = {
   title: string;
-  description: string;
   channelTitle: string;
 };
 
