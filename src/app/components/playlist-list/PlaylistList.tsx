@@ -37,9 +37,10 @@ const PlaylistList = ({
             onClick={() => handleSelectPlaylist(metadata)}
           >
             <a
-              className={`pl-4 pr-4 pb-1 pt-1 text-white text-3xl text-shadow-black text-left rounded-2xl w-max hover:bg-hover-highlight-blue hover:text-black hover:text-shadow-white ${
-                focusedPlaylist === metadata.id &&
-                "bg-select-highlight-blue text-black text-shadow-white"
+              className={`pl-4 pr-4 pb-1 pt-1 text-3xl text-shadow-black text-left rounded-2xl w-max hover:bg-hover-highlight-blue hover:text-black hover:text-shadow-white focus:bg-select-highlight-blue focus:text-black focus:text-shadow-white ${
+                focusedPlaylist === metadata.id
+                  ? "bg-select-highlight-blue text-black text-shadow-white"
+                  : "text-white"
               }`}
               href="#"
             >
@@ -50,7 +51,7 @@ const PlaylistList = ({
       </ul>
       <div className="flex items-center justify-center">
         <button
-          className="absolute bottom-0 left-0 w-[15rem] h-11 ml-5 mb-4 rounded-lg border-2 flex bg-container-light-blue hover:bg-button-highlight-blue active:bg-button-select-blue"
+          className="absolute bottom-0 left-0 w-[14.75rem] h-11 ml-[1.3rem] mb-5 rounded-lg border-2 flex bg-container-light-blue hover:bg-button-highlight-blue active:bg-button-select-blue"
           onClick={openAddPlaylistModalCallback}
         >
           <div className="w-10 h-10 bg-white rounded-lg border-2 flex items-center justify-center">
