@@ -21,25 +21,33 @@ const useYoutubeDataFetcher = (): YoutubeDataFetcher => {
   const addPlaylistId = async (
     playlistId: string
   ): Promise<ValidationResult> => {
-    const youtubeMetadata = (await FetchHandler.fetch(
-      `https://youtube.googleapis.com/youtube/v3/playlists?part=snippet&id=${playlistId}&key=${Config.youtubeApiKey}&maxResults=5`
-    )) as YoutubeMetadataResponse;
+    let playlistValidationResult;
+    try {
+      const youtubeMetadata = (await FetchHandler.fetch(
+        `https://youtube.googleapis.com/youtube/v3/playlists?part=snippet&id=${playlistId}&key=${Config.youtubeApiKey}&maxResults=5`
+      )) as YoutubeMetadataResponse;
 
-    const playlistValidationResult = PlaylistValidator.validatePlaylistData(
-      playlistId,
-      playlistMetadataCollection,
-      youtubeMetadata
-    );
+      playlistValidationResult = PlaylistValidator.validatePlaylistData(
+        playlistId,
+        playlistMetadataCollection,
+        youtubeMetadata
+      );
 
-    if (playlistValidationResult.valid) {
-      setPlaylistMetadataCollection([
-        ...playlistMetadataCollection,
-        {
-          id: playlistId,
-          title: youtubeMetadata.items[0].snippet.title,
-          channelTitle: youtubeMetadata.items[0].snippet.channelTitle,
-        },
-      ]);
+      if (playlistValidationResult.valid) {
+        setPlaylistMetadataCollection([
+          ...playlistMetadataCollection,
+          {
+            id: playlistId,
+            title: youtubeMetadata.items[0].snippet.title,
+            channelTitle: youtubeMetadata.items[0].snippet.channelTitle,
+          },
+        ]);
+      }
+    } catch {
+      playlistValidationResult = {
+        valid: false,
+        message: "Internal server error",
+      };
     }
 
     return playlistValidationResult;

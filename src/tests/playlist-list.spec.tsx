@@ -156,6 +156,19 @@ describe("PlaylistList", () => {
           ).toBeInTheDocument();
         });
       });
+
+      it("should show a validation message if there is an issue calling the youtube api", async () => {
+        const mockFetchApiError = jest.fn().mockRejectedValue(new Error());
+        FetchHandler.fetch = mockFetchApiError;
+
+        render(<Home />);
+
+        await addTestPlaylistPath();
+
+        waitFor(() => {
+          expect(screen.getByText("Internal server error")).toBeInTheDocument();
+        });
+      });
     });
   });
 });

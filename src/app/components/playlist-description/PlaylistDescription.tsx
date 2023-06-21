@@ -19,7 +19,7 @@ const PlaylistDescription = ({
         {selectedPlaylistMetadata ? selectedPlaylistMetadata.channelTitle : ""}
       </p>
       <p className="text-white text-4xl font-semibold text-shadow-black mt-9 ml-5">
-        74 videos
+        {/* 74 videos */}
       </p>
     </>
   );
