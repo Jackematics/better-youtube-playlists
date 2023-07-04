@@ -9,7 +9,7 @@ import { ValidationResult } from "../types/validation-types";
 import PlaylistValidator from "../validators/playlist-validator";
 
 type YoutubeDataFetcher = {
-  addPlaylistId: (playlistId: string) => Promise<ValidationResult>;
+  handleAddPlaylistId: (playlistId: string) => Promise<ValidationResult>;
   playlistMetadataCollection: PlaylistMetadata[];
 };
 
@@ -18,7 +18,7 @@ const useYoutubeDataFetcher = (): YoutubeDataFetcher => {
     PlaylistMetadata[]
   >([]);
 
-  const addPlaylistId = async (
+  const handleAddPlaylistId = async (
     playlistId: string
   ): Promise<ValidationResult> => {
     let playlistValidationResult;
@@ -53,7 +53,10 @@ const useYoutubeDataFetcher = (): YoutubeDataFetcher => {
     return playlistValidationResult;
   };
 
-  return { addPlaylistId, playlistMetadataCollection };
+  return {
+    handleAddPlaylistId,
+    playlistMetadataCollection,
+  };
 };
 
 export default useYoutubeDataFetcher;

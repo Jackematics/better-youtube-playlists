@@ -11,7 +11,8 @@ import PlaylistDescription from "./components/playlist-description/PlaylistDescr
 const Home = () => {
   const [addPlaylistModalOpen, setAddPlaylistModalOpen] =
     useState<boolean>(false);
-  const { addPlaylistId, playlistMetadataCollection } = useYoutubeDataFetcher();
+  const { handleAddPlaylistId: addPlaylistId, playlistMetadataCollection } =
+    useYoutubeDataFetcher();
   const [selectedPlaylistMetadata, setSelectedPlaylistMetadata] = useState<
     PlaylistMetadata | undefined
   >(undefined);
