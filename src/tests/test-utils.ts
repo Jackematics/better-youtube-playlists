@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react";
 
-export const addTestPlaylistPath = () => {
+export const addTestPlaylistPath = async () => {
   const addPlaylistButton = screen.getByRole("button", {
     name: /Add Playlist/i,
   });

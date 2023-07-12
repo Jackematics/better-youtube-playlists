@@ -1,7 +1,7 @@
-import { PlaylistMetadata } from "@/app/types/youtube-metadata-types";
+import { SelectedPlaylistMetadata } from "@/app/types/youtube-playlist-metadata-types";
 
 type PlaylistDescriptionProps = {
-  selectedPlaylistMetadata: PlaylistMetadata | undefined;
+  selectedPlaylistMetadata: SelectedPlaylistMetadata | undefined;
 };
 
 const PlaylistDescription = ({
@@ -19,7 +19,9 @@ const PlaylistDescription = ({
         {selectedPlaylistMetadata ? selectedPlaylistMetadata.channelTitle : ""}
       </p>
       <p className="text-white text-4xl font-semibold text-shadow-black mt-9 ml-5">
-        {/* 74 videos */}
+        {selectedPlaylistMetadata
+          ? `${selectedPlaylistMetadata.totalResults} videos`
+          : ""}
       </p>
     </>
   );

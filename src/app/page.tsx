@@ -3,29 +3,41 @@
 import { useState } from "react";
 import AddPlaylistModal from "./components/playlist-list/AddPlaylistModal";
 import PlaylistList from "./components/playlist-list/PlaylistList";
-import useYoutubeDataFetcher from "./hooks/useYoutubeDataFetcher";
-import { ValidationResult } from "./types/validation-types";
-import { PlaylistMetadata } from "./types/youtube-metadata-types";
+import useYoutubeMetadataFetcher from "./hooks/useYoutubeMetadataFetcher";
+import {
+  PlaylistMetadata,
+  SelectedPlaylistMetadata,
+} from "./types/youtube-playlist-metadata-types";
 import PlaylistDescription from "./components/playlist-description/PlaylistDescription";
+import useYoutubePlaylistItemsFetcher from "./hooks/useYoutubePlaylistItemsFetcher";
+import { PlaylistItem } from "./types/youtube-playlist-items-types";
 
 const Home = () => {
   const [addPlaylistModalOpen, setAddPlaylistModalOpen] =
     useState<boolean>(false);
-  const { handleAddPlaylistId: addPlaylistId, playlistMetadataCollection } =
-    useYoutubeDataFetcher();
+  const {
+    updatePlaylistMetadataState,
+    playlistMetadataCollection,
+    playlistMetadataValidationResult,
+  } = useYoutubeMetadataFetcher();
+
+  const { updatePlaylistItemCollectionState, playlistItemCollection } =
+    useYoutubePlaylistItemsFetcher();
+
   const [selectedPlaylistMetadata, setSelectedPlaylistMetadata] = useState<
-    PlaylistMetadata | undefined
-  >(undefined);
+    SelectedPlaylistMetadata | undefined
+  >();
 
   const openAddPlaylistModal = (): void => {
     setAddPlaylistModalOpen(true);
   };
 
-  const handleAddPlaylistId = async (
-    playlistId: string
-  ): Promise<ValidationResult> => {
-    const validationResult = await addPlaylistId(playlistId);
-    return validationResult;
+  const handleAddPlaylistId = async (playlistId: string): Promise<void> => {
+    await updatePlaylistMetadataState(playlistId);
+
+    if (playlistMetadataValidationResult.valid) {
+      await updatePlaylistItemCollectionState(playlistId);
+    }
   };
 
   const closeAddPlaylistModal = (): void => {
@@ -35,7 +47,11 @@ const Home = () => {
   };
 
   const handleSelectPlaylist = (playlistMetadata: PlaylistMetadata): void => {
-    setSelectedPlaylistMetadata(playlistMetadata);
+    const totalResults = playlistItemCollection.find(
+      (item: PlaylistItem) => item.id === playlistMetadata.id
+    )!.totalResults;
+
+    setSelectedPlaylistMetadata({ ...playlistMetadata, totalResults });
   };
 
   return (
@@ -64,6 +80,7 @@ const Home = () => {
         data-testid="add-playlist-modal-wrapper"
       >
         <AddPlaylistModal
+          playlistMetadataValidationResult={playlistMetadataValidationResult}
           addPlaylistIdCallback={handleAddPlaylistId}
           closePlaylistModalCallback={closeAddPlaylistModal}
         />

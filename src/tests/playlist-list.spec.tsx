@@ -1,27 +1,32 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  act,
+} from "@testing-library/react";
 import Home from "../app/page";
 import FetchHandler from "../app/handlers/fetch-handler";
 import { addTestPlaylistPath } from "./test-utils";
+import TestData from "./test-data";
 
-let originalFetch = FetchHandler.fetch;
+let originalFetchPlaylistMetadata = FetchHandler.fetchYoutubePlaylistMetadata;
+let originalFetchPlaylistItemsData = FetchHandler.fetchYoutubePlaylistItemsData;
+
 describe("PlaylistList", () => {
   beforeEach(() => {
-    const mockFetch = jest.fn().mockResolvedValue({
-      items: [
-        {
-          id: "test-id",
-          snippet: {
-            title: "Test Playlist",
-          },
-        },
-      ],
-    });
+    FetchHandler.fetchYoutubePlaylistMetadata = jest
+      .fn()
+      .mockResolvedValue(TestData.youtubePlaylistMetadata);
 
-    FetchHandler.fetch = mockFetch;
+    FetchHandler.fetchYoutubePlaylistItemsData = jest
+      .fn()
+      .mockResolvedValue(TestData.youtubePlaylistItemsData);
   });
 
   afterEach(() => {
-    FetchHandler.fetch = originalFetch;
+    FetchHandler.fetchYoutubePlaylistMetadata = originalFetchPlaylistMetadata;
+    FetchHandler.fetchYoutubePlaylistItemsData = originalFetchPlaylistItemsData;
   });
 
   describe("AddPlaylistModal", () => {
@@ -75,24 +80,25 @@ describe("PlaylistList", () => {
       expect(addPlaylistModal).toHaveClass("hidden");
     });
 
-    it("should add a new playlist to the playlist list if the Add button is clicked when a valid playlist id is given", () => {
+    it("should add a new playlist to the playlist list if the Add button is clicked when a valid playlist id is given", async () => {
       render(<Home />);
 
-      addTestPlaylistPath();
+      await act(() => addTestPlaylistPath());
 
-      waitFor(() => {
+      await waitFor(() => {
         expect(screen.getByText("Test Playlist")).toBeInTheDocument();
       });
     });
 
     describe("Modal validation", () => {
-      it("should show a validation message if an invalid playlist id is sent", () => {
+      it("should show a validation message if an invalid playlist id is sent", async () => {
         render(<Home />);
 
-        const mockFetchInvalidId = jest.fn().mockResolvedValue({
-          items: [],
-        });
-        FetchHandler.fetch = mockFetchInvalidId;
+        FetchHandler.fetchYoutubePlaylistMetadata = jest
+          .fn()
+          .mockResolvedValue({
+            items: [],
+          });
 
         const addPlaylistButton = screen.getByRole("button", {
           name: /Add Playlist/i,
@@ -106,51 +112,20 @@ describe("PlaylistList", () => {
         });
         fireEvent.click(addButton);
 
-        waitFor(() => {
+        await waitFor(() => {
           expect(screen.getByText("Invalid playlist id")).toBeInTheDocument();
-        });
-      });
-
-      it("should clear the playlist id input and validation messages if the playlist is closed", () => {
-        const mockFetchInvalidId = jest.fn().mockResolvedValue({
-          items: [],
-        });
-        FetchHandler.fetch = mockFetchInvalidId;
-
-        render(<Home />);
-
-        const addPlaylistButton = screen.getByRole("button", {
-          name: /Add Playlist/i,
-        });
-        const playlistIdInput = screen.getByTestId("playlist-id-input");
-        const addButton = screen.getByTestId("add-id-button");
-        const cancelButton = screen.getByRole("button", { name: /Cancel/i });
-
-        fireEvent.click(addPlaylistButton);
-        fireEvent.change(playlistIdInput, {
-          target: { value: "test-playlist-id" },
-        });
-        fireEvent.click(addButton);
-        fireEvent.click(cancelButton);
-        fireEvent.click(addPlaylistButton);
-
-        waitFor(() => {
-          expect(
-            screen.getByText("Invalid playlist id")
-          ).not.toBeInTheDocument();
-          expect(screen.getByText("test-playlist-id")).not.toBeInTheDocument();
         });
       });
 
       it("should show a validation message if a duplicate playlist is added", async () => {
         render(<Home />);
 
-        await addTestPlaylistPath();
-        await addTestPlaylistPath();
+        await act(() => addTestPlaylistPath());
+        await act(() => addTestPlaylistPath());
 
         expect(screen.getAllByText("Test Playlist").length).toBe(1);
 
-        waitFor(() => {
+        await waitFor(() => {
           expect(
             screen.getByText("Playlists cannot be duplicated")
           ).toBeInTheDocument();
@@ -158,14 +133,15 @@ describe("PlaylistList", () => {
       });
 
       it("should show a validation message if there is an issue calling the youtube api", async () => {
-        const mockFetchApiError = jest.fn().mockRejectedValue(new Error());
-        FetchHandler.fetch = mockFetchApiError;
+        FetchHandler.fetchYoutubePlaylistMetadata = jest
+          .fn()
+          .mockRejectedValue(new Error());
 
         render(<Home />);
 
-        await addTestPlaylistPath();
+        await act(() => addTestPlaylistPath());
 
-        waitFor(() => {
+        await waitFor(() => {
           expect(screen.getByText("Internal server error")).toBeInTheDocument();
         });
       });

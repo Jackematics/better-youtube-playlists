@@ -1,12 +1,14 @@
+export type SelectedPlaylistMetadata = {
+  id: string;
+  title: string;
+  channelTitle: string;
+  totalResults: number;
+};
+
 export type PlaylistMetadata = {
   id: string;
   title: string;
   channelTitle: string;
-};
-
-type PageInfo = {
-  totalResults: number;
-  resultsPerPage: number;
 };
 
 type Snippet = {
@@ -19,6 +21,6 @@ type MetadataItem = {
   snippet: Snippet;
 };
 
-export type YoutubeMetadataResponse = {
+export type YoutubePlaylistMetadataResponse = {
   items: MetadataItem[];
 };

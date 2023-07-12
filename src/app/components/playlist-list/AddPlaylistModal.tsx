@@ -1,19 +1,30 @@
 "use-client";
 
 import { ValidationResult } from "@/app/types/validation-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type AddPlaylistModalProps = {
-  addPlaylistIdCallback: (playlistId: string) => Promise<ValidationResult>;
+  playlistMetadataValidationResult: ValidationResult;
+  addPlaylistIdCallback: (playlistId: string) => void;
   closePlaylistModalCallback: () => void;
 };
 
 const AddPlaylistModal = ({
+  playlistMetadataValidationResult,
   addPlaylistIdCallback,
   closePlaylistModalCallback,
 }: AddPlaylistModalProps) => {
   const [playlistId, setPlaylistId] = useState<string>("");
   const [validationMessage, setValidationMessage] = useState<string>("");
+
+  useEffect(() => {
+    if (playlistMetadataValidationResult.valid) {
+      closePlaylistModalCallback();
+    }
+
+    setPlaylistId("");
+    setValidationMessage(playlistMetadataValidationResult.message);
+  }, [playlistMetadataValidationResult]);
 
   const handlePlaylistIdInputChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -21,15 +32,8 @@ const AddPlaylistModal = ({
     setPlaylistId(e.currentTarget.value);
   };
 
-  const handleAddClick = async () => {
-    const validationResult = await addPlaylistIdCallback(playlistId);
-
-    if (validationResult.valid) {
-      closePlaylistModalCallback();
-    }
-
-    setPlaylistId("");
-    setValidationMessage(validationResult.message);
+  const handleAddClick = async (): Promise<void> => {
+    await addPlaylistIdCallback(playlistId);
   };
 
   const handleCancelClick = () => {
@@ -61,7 +65,10 @@ const AddPlaylistModal = ({
           </div>
         </div>
         <div className="h-5 mt-1 ml-16">
-          <p className="text-cancel-red text-xl font-bold">
+          <p
+            className="text-cancel-red text-xl font-bold"
+            data-testid="add-playlist-validation-message"
+          >
             {validationMessage}
           </p>
         </div>

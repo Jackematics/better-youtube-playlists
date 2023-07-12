@@ -1,14 +1,14 @@
 import { ValidationResult } from "../types/validation-types";
 import {
   PlaylistMetadata,
-  YoutubeMetadataResponse,
-} from "../types/youtube-metadata-types";
+  YoutubePlaylistMetadataResponse,
+} from "../types/youtube-playlist-metadata-types";
 
 export default class PlaylistValidator {
-  public static validatePlaylistData(
+  public static validatePlaylistMetadataResponse(
     playlistId: string,
     playlistMetadataCollection: PlaylistMetadata[],
-    youtubeMetadata: YoutubeMetadataResponse
+    youtubeMetadata: YoutubePlaylistMetadataResponse
   ): ValidationResult {
     let validationResult: ValidationResult = { valid: true, message: "" };
 

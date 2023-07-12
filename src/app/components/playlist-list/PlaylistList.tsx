@@ -1,7 +1,7 @@
 "use-client";
 
 import { useState } from "react";
-import { PlaylistMetadata } from "../../types/youtube-metadata-types";
+import { PlaylistMetadata } from "../../types/youtube-playlist-metadata-types";
 import Image from "next/image";
 
 type PlaylistListProps = {
