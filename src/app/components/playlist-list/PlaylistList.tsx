@@ -1,6 +1,6 @@
 "use-client";
 
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { PlaylistMetadata } from "../../types/youtube-playlist-metadata-types";
 import Image from "next/image";
 
@@ -19,7 +19,11 @@ const PlaylistList = ({
     undefined
   );
 
-  const handleSelectPlaylist = (metadata: PlaylistMetadata) => {
+  const handleSelectPlaylist = (
+    e: MouseEvent<HTMLLIElement, MouseEvent>,
+    metadata: PlaylistMetadata
+  ) => {
+    e.preventDefault();
     setFocusedPlaylist(metadata.id);
     selectPlaylistCallback(metadata);
   };
@@ -34,18 +38,17 @@ const PlaylistList = ({
           <li
             key={metadata.id}
             className="mb-3"
-            onClick={() => handleSelectPlaylist(metadata)}
+            onClick={(e) => handleSelectPlaylist(e, metadata)}
           >
-            <a
-              className={`pl-4 pr-4 pb-1 pt-1 text-3xl text-shadow-black text-left rounded-2xl w-max hover:bg-hover-highlight-blue hover:text-black hover:text-shadow-white focus:bg-select-highlight-blue focus:text-black focus:text-shadow-white ${
+            <option
+              className={`pl-4 pr-4 pb-1 pt-1 text-3xl text-shadow-black text-left rounded-2xl w-max cursor-pointer hover:bg-hover-highlight-blue hover:text-black hover:text-shadow-white focus:bg-select-highlight-blue focus:text-black focus:text-shadow-white ${
                 focusedPlaylist === metadata.id
                   ? "bg-select-highlight-blue text-black text-shadow-white"
                   : "text-white"
               }`}
-              href="#"
             >
               {metadata.title}
-            </a>
+            </option>
           </li>
         ))}
       </ul>

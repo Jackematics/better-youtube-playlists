@@ -11,6 +11,7 @@ import {
 import PlaylistDescription from "./components/playlist-description/PlaylistDescription";
 import useYoutubePlaylistItemsFetcher from "./hooks/useYoutubePlaylistItemsFetcher";
 import { PlaylistItem } from "./types/youtube-playlist-items-types";
+import Playlist from "./components/playlist/Playlist";
 
 const Home = () => {
   const [addPlaylistModalOpen, setAddPlaylistModalOpen] =
@@ -68,11 +69,18 @@ const Home = () => {
             selectPlaylistCallback={handleSelectPlaylist}
           />
         </div>
-        <div className="flex-initial min-w-[38rem] h-[26rem] bg-black mt-4 mr-4 relative"></div>
-        <div className="flex-initial w-[40rem] h-[18.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative">
-          <PlaylistDescription
-            selectedPlaylistMetadata={selectedPlaylistMetadata}
-          />
+        <div>
+          <div className="flex flex-row">
+            <div className="flex-initial min-w-[38rem] h-[26rem] bg-black mt-4 mr-4 relative"></div>
+            <div className="flex-initial w-[40rem] h-[18.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative">
+              <PlaylistDescription
+                selectedPlaylistMetadata={selectedPlaylistMetadata}
+              />
+            </div>
+          </div>
+          <div className="w-[79rem] h-[29.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative">
+            <Playlist />
+          </div>
         </div>
       </div>
       <div
