@@ -22,6 +22,7 @@ An improved user experience for anyone who likes to listen to music using Youtub
   - Should populate the playlist description and playlist items
   - Should reset configurations of all operations to default
   - Should reset youtube video iframe to default
+- Cache: should cache playlist list data so users returning to the site will automatically have playlists loaded
 - (Stretch) If playlists reach a max number implement a scroll
 
 ### Playlist Items

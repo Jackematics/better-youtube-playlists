@@ -1,5 +1,5 @@
 import Config from "../config";
-import { YoutubePlaylistItemsResponse } from "../types/youtube-playlist-items-types";
+import { YoutubePlaylistItemsResponse } from "../types/youtube-playlist-items-response-types";
 import { YoutubePlaylistMetadataResponse } from "../types/youtube-playlist-metadata-types";
 
 export default class FetchHandler {

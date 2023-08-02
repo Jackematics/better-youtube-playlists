@@ -19,11 +19,7 @@ const PlaylistList = ({
     undefined
   );
 
-  const handleSelectPlaylist = (
-    e: MouseEvent<HTMLLIElement, MouseEvent>,
-    metadata: PlaylistMetadata
-  ) => {
-    e.preventDefault();
+  const handleSelectPlaylist = (metadata: PlaylistMetadata) => {
     setFocusedPlaylist(metadata.id);
     selectPlaylistCallback(metadata);
   };
@@ -38,7 +34,7 @@ const PlaylistList = ({
           <li
             key={metadata.id}
             className="mb-3"
-            onClick={(e) => handleSelectPlaylist(e, metadata)}
+            onClick={() => handleSelectPlaylist(metadata)}
           >
             <option
               className={`pl-4 pr-4 pb-1 pt-1 text-3xl text-shadow-black text-left rounded-2xl w-max cursor-pointer hover:bg-hover-highlight-blue hover:text-black hover:text-shadow-white focus:bg-select-highlight-blue focus:text-black focus:text-shadow-white ${

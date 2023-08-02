@@ -1,19 +1,15 @@
 import { useState } from "react";
-import Config from "../config";
 import FetchHandler from "../handlers/fetch-handler";
-import {
-  PlaylistItem,
-  YoutubePlaylistItemsResponse,
-} from "../types/youtube-playlist-items-types";
+import { PlaylistData } from "../types/youtube-playlist-items-types";
 
 type YoutubePlaylistItemsFetcher = {
   updatePlaylistItemCollectionState: (playlistId: string) => Promise<void>;
-  playlistItemCollection: PlaylistItem[];
+  playlistItemCollection: PlaylistData[];
 };
 
 const useYoutubePlaylistItemsFetcher = (): YoutubePlaylistItemsFetcher => {
   const [playlistItemCollection, setPlaylistItemCollection] = useState<
-    PlaylistItem[]
+    PlaylistData[]
   >([]);
 
   const updatePlaylistItemCollectionState = async (
@@ -27,6 +23,11 @@ const useYoutubePlaylistItemsFetcher = (): YoutubePlaylistItemsFetcher => {
       {
         id: playlistId,
         totalResults: youtubePlaylistItemsData.pageInfo.totalResults,
+        items: youtubePlaylistItemsData.items.map((item) => ({
+          videoId: item.snippet.resourceId.videoId,
+          thumbnail: item.snippet.thumbnails.default,
+          title: item.snippet.title,
+        })),
       },
     ]);
   };

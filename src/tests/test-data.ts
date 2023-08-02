@@ -12,6 +12,38 @@ export default class TestData {
   };
 
   public static readonly youtubePlaylistItemsData = {
+    items: [
+      {
+        snippet: {
+          title: "Test Song 1",
+          thumbnails: {
+            default: {
+              url: "test-thumbnail-url-1",
+              width: 420,
+              height: 69,
+            },
+          },
+          resourceId: {
+            videoId: "test-video-url-1",
+          },
+        },
+      },
+      {
+        snippet: {
+          title: "Test Song 2",
+          thumbnails: {
+            default: {
+              url: "test-thumbnail-url-2",
+              width: 420,
+              height: 69,
+            },
+          },
+          resourceId: {
+            videoId: "test-video-url-2",
+          },
+        },
+      },
+    ],
     pageInfo: {
       totalResults: 123,
     },

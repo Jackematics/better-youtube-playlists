@@ -10,7 +10,7 @@ import {
 } from "./types/youtube-playlist-metadata-types";
 import PlaylistDescription from "./components/playlist-description/PlaylistDescription";
 import useYoutubePlaylistItemsFetcher from "./hooks/useYoutubePlaylistItemsFetcher";
-import { PlaylistItem } from "./types/youtube-playlist-items-types";
+import { PlaylistData } from "./types/youtube-playlist-items-types";
 import Playlist from "./components/playlist/Playlist";
 
 const Home = () => {
@@ -27,6 +27,9 @@ const Home = () => {
 
   const [selectedPlaylistMetadata, setSelectedPlaylistMetadata] = useState<
     SelectedPlaylistMetadata | undefined
+  >();
+  const [selectedPlaylistData, setSelectedPlaylistData] = useState<
+    PlaylistData | undefined
   >();
 
   const openAddPlaylistModal = (): void => {
@@ -48,11 +51,15 @@ const Home = () => {
   };
 
   const handleSelectPlaylist = (playlistMetadata: PlaylistMetadata): void => {
-    const totalResults = playlistItemCollection.find(
-      (item: PlaylistItem) => item.id === playlistMetadata.id
-    )!.totalResults;
+    const selectedPlaylist = playlistItemCollection.find(
+      (item: PlaylistData) => item.id === playlistMetadata.id
+    )!;
 
-    setSelectedPlaylistMetadata({ ...playlistMetadata, totalResults });
+    setSelectedPlaylistMetadata({
+      ...playlistMetadata,
+      totalResults: selectedPlaylist.totalResults,
+    });
+    setSelectedPlaylistData(selectedPlaylist);
   };
 
   return (
@@ -79,7 +86,7 @@ const Home = () => {
             </div>
           </div>
           <div className="w-[79rem] h-[29.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative">
-            <Playlist />
+            <Playlist selectedPlaylistData={selectedPlaylistData} />
           </div>
         </div>
       </div>
