@@ -13,6 +13,15 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        port: "",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

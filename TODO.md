@@ -29,9 +29,9 @@ An improved user experience for anyone who likes to listen to music using Youtub
 
 - Items UI :white_check_mark:
 - Default: Empty container :white_check_mark:
-- List playlist items of selected playlist
-  - Item number, thumbnail, video title, video length
-- Scroll through items
+- List playlist items of selected playlist :white_check_mark:
+  - Item number, thumbnail, video title :white_check_mark:
+- Scroll through items :white_check_mark:
 - Selecting an item highlights it
 - Playlist titles beyond a certain character length move to the next line
 

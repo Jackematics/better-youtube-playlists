@@ -85,7 +85,7 @@ const Home = () => {
               />
             </div>
           </div>
-          <div className="w-[79rem] h-[29.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative">
+          <div className="w-[79rem] h-[29.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative overflow-y-scroll">
             <Playlist selectedPlaylistData={selectedPlaylistData} />
           </div>
         </div>
