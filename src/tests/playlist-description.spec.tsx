@@ -29,6 +29,12 @@ describe("PlaylistDescription", () => {
     FetchHandler.fetchYoutubePlaylistItemsData = originalFetchPlaylistItemsData;
   });
 
+  it("should say 'No Playlist Selected' by default", () => {
+    render(<Home />);
+
+    expect(screen.getByText("No Playlist Selected")).toBeInTheDocument();
+  });
+
   it("should populate the playlist description container with information about the selected playlist", async () => {
     render(<Home />);
 
@@ -43,6 +49,9 @@ describe("PlaylistDescription", () => {
       );
       expect(screen.getByText("Test Channel Title")).toBeInTheDocument();
       expect(screen.getByText("123 videos")).toBeInTheDocument();
+      expect(
+        screen.queryByText("No Playlist Selected")
+      ).not.toBeInTheDocument();
     });
   });
 });

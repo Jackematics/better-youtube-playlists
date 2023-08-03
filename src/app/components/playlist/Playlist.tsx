@@ -20,7 +20,7 @@ const Playlist = ({ selectedPlaylistData }: PlaylistProps) => {
             <Image
               src={item.thumbnail.url}
               alt="add playlist"
-              width={60}
+              width={70}
               height={36}
               priority
               className="ml-6 mr-2"
