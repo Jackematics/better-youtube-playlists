@@ -10,7 +10,10 @@ import {
 } from "./types/youtube-playlist-metadata-types";
 import PlaylistDescription from "./components/playlist-description/PlaylistDescription";
 import useYoutubePlaylistItemsFetcher from "./hooks/useYoutubePlaylistItemsFetcher";
-import { PlaylistData } from "./types/youtube-playlist-items-types";
+import {
+  PlaylistData,
+  PlaylistItem,
+} from "./types/youtube-playlist-items-types";
 import Playlist from "./components/playlist/Playlist";
 import YoutubeVideoEmbed from "./components/youtube-video-embed/YoutubeVideoEmbed";
 
@@ -31,6 +34,9 @@ const Home = () => {
   >();
   const [selectedPlaylistData, setSelectedPlaylistData] = useState<
     PlaylistData | undefined
+  >();
+  const [selectedPlaylistItem, setSelectedPlaylistItem] = useState<
+    PlaylistItem | undefined
   >();
 
   const openAddPlaylistModal = (): void => {
@@ -63,6 +69,10 @@ const Home = () => {
     setSelectedPlaylistData(selectedPlaylist);
   };
 
+  const handlePlaylistItemSelect = (playlistItem: PlaylistItem) => {
+    setSelectedPlaylistItem(playlistItem);
+  };
+
   return (
     <main className="bg-background-dark-blue">
       <div
@@ -80,7 +90,7 @@ const Home = () => {
         <div>
           <div className="flex flex-row">
             <div className="flex-initial min-w-[38rem] h-[26rem] mt-4 mr-4 relative">
-              <YoutubeVideoEmbed />
+              <YoutubeVideoEmbed selectedPlaylistItem={selectedPlaylistItem} />
             </div>
             <div className="flex-initial w-[40rem] h-[18.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative">
               <PlaylistDescription
@@ -89,7 +99,10 @@ const Home = () => {
             </div>
           </div>
           <div className="w-[79rem] h-[29.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative overflow-y-scroll">
-            <Playlist selectedPlaylistData={selectedPlaylistData} />
+            <Playlist
+              selectedPlaylistData={selectedPlaylistData}
+              playlistItemSelectCallback={handlePlaylistItemSelect}
+            />
           </div>
         </div>
       </div>

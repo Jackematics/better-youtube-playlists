@@ -34,4 +34,20 @@ describe("YoutubeVideoEmbed", () => {
 
     expect(screen.getByTitle("video-placeholder")).toBeInTheDocument();
   });
+
+  it("should set a youtube video with the correct title on song click", async () => {
+    render(<Home />);
+
+    await act(() => addTestPlaylistPath());
+    await act(() => {
+      fireEvent.click(screen.getByText("Test Playlist"));
+    });
+    const playlistLiElement = screen.getByTestId("test-video-id-2");
+
+    await act(() => fireEvent.click(playlistLiElement));
+
+    await waitFor(() => {
+      expect(screen.getByTitle("Test Song 2")).toBeInTheDocument();
+    });
+  });
 });

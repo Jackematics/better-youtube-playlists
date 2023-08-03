@@ -1,14 +1,14 @@
 import {
-  fireEvent,
   render,
   screen,
   waitFor,
   act,
+  fireEvent,
 } from "@testing-library/react";
 import Home from "../app/page";
 import FetchHandler from "../app/handlers/fetch-handler";
-import { addTestPlaylistPath } from "./test-utils";
 import TestData from "./test-data";
+import { addTestPlaylistPath } from "./test-utils";
 
 let originalFetchPlaylistMetadata = FetchHandler.fetchYoutubePlaylistMetadata;
 let originalFetchPlaylistItemsData = FetchHandler.fetchYoutubePlaylistItemsData;

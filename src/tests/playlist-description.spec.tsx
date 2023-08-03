@@ -39,7 +39,7 @@ describe("PlaylistDescription", () => {
     render(<Home />);
 
     await act(() => addTestPlaylistPath());
-    act(() => {
+    await act(() => {
       fireEvent.click(screen.getByText("Test Playlist"));
     });
 

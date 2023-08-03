@@ -4,7 +4,7 @@ type Thumbnail = {
   height: number;
 };
 
-type Item = {
+export type PlaylistItem = {
   videoId: string;
   thumbnail: Thumbnail;
   title: string;
@@ -13,5 +13,5 @@ type Item = {
 export type PlaylistData = {
   id: string;
   totalResults: number;
-  items: Item[];
+  playlistItems: PlaylistItem[];
 };

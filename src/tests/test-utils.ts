@@ -1,6 +1,6 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, act } from "@testing-library/react";
 
-export const addTestPlaylistPath = async () => {
+const addTestPlaylistPath = async () => {
   const addPlaylistButton = screen.getByRole("button", {
     name: /Add Playlist/i,
   });
@@ -13,3 +13,5 @@ export const addTestPlaylistPath = async () => {
   });
   fireEvent.click(addButton);
 };
+
+export { addTestPlaylistPath };

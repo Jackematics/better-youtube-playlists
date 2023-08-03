@@ -24,7 +24,7 @@ export default class TestData {
             },
           },
           resourceId: {
-            videoId: "/test-video-url-1",
+            videoId: "test-video-id-1",
           },
         },
       },
@@ -39,7 +39,7 @@ export default class TestData {
             },
           },
           resourceId: {
-            videoId: "/test-video-url-2",
+            videoId: "test-video-id-2",
           },
         },
       },

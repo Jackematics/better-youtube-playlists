@@ -22,6 +22,7 @@ An improved user experience for anyone who likes to listen to music using Youtub
   - Should populate the playlist description and playlist items :white_check_mark:
   - Should reset youtube video iframe to default
 - Cache: should cache playlist list data so users returning to the site will automatically have playlists loaded
+- Complete metadata fetch validation
 - (Stretch) If playlists reach a max number implement a scroll
 
 ### Playlist Items
@@ -33,10 +34,11 @@ An improved user experience for anyone who likes to listen to music using Youtub
 - Scroll through items :white_check_mark:
 - Selecting an item highlights it
 - Playlist titles beyond a certain character length move to the next line :white_check_mark:
+- Validate items fetch
 
 ### Video Player
 
-- Default: show a graphic and prompt to add a playlist and select an item
+- Default: show a graphic and prompt to add a playlist and select an item :white_check_mark:
 - On playlist item select: display and play video corresponding to selected item
 - On video end: move to the next playlist item
 - On playlist end: stop
@@ -56,6 +58,10 @@ An improved user experience for anyone who likes to listen to music using Youtub
   - If input blank, return the whole list
   - If input not blank, return all items in the list that contains a word that matches the input
   - When a video is selected, reset the search to show the whole list, set the iframe to be the selected video, empty the input box, scroll to selected video in list.
+
+### Misc
+
+- Description and Playlist Items shrinks on lower screen sizes
 
 ### Stretch Goals
 

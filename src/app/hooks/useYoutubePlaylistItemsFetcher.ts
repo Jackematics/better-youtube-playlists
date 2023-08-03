@@ -23,7 +23,7 @@ const useYoutubePlaylistItemsFetcher = (): YoutubePlaylistItemsFetcher => {
       {
         id: playlistId,
         totalResults: youtubePlaylistItemsData.pageInfo.totalResults,
-        items: youtubePlaylistItemsData.items.map((item) => ({
+        playlistItems: youtubePlaylistItemsData.items.map((item) => ({
           videoId: item.snippet.resourceId.videoId,
           thumbnail: item.snippet.thumbnails.default,
           title: item.snippet.title,
