@@ -12,6 +12,7 @@ import PlaylistDescription from "./components/playlist-description/PlaylistDescr
 import useYoutubePlaylistItemsFetcher from "./hooks/useYoutubePlaylistItemsFetcher";
 import { PlaylistData } from "./types/youtube-playlist-items-types";
 import Playlist from "./components/playlist/Playlist";
+import YoutubeVideoEmbed from "./components/youtube-video-embed/YoutubeVideoEmbed";
 
 const Home = () => {
   const [addPlaylistModalOpen, setAddPlaylistModalOpen] =
@@ -78,7 +79,9 @@ const Home = () => {
         </div>
         <div>
           <div className="flex flex-row">
-            <div className="flex-initial min-w-[38rem] h-[26rem] bg-black mt-4 mr-4 relative"></div>
+            <div className="flex-initial min-w-[38rem] h-[26rem] mt-4 mr-4 relative">
+              <YoutubeVideoEmbed />
+            </div>
             <div className="flex-initial w-[40rem] h-[18.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative">
               <PlaylistDescription
                 selectedPlaylistMetadata={selectedPlaylistMetadata}
