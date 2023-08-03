@@ -18,13 +18,13 @@ export default class TestData {
           title: "Test Song 1",
           thumbnails: {
             default: {
-              url: "test-thumbnail-url-1",
+              url: "/test-thumbnail-url-1",
               width: 420,
               height: 69,
             },
           },
           resourceId: {
-            videoId: "test-video-url-1",
+            videoId: "/test-video-url-1",
           },
         },
       },
@@ -33,13 +33,13 @@ export default class TestData {
           title: "Test Song 2",
           thumbnails: {
             default: {
-              url: "test-thumbnail-url-2",
+              url: "/test-thumbnail-url-2",
               width: 420,
               height: 69,
             },
           },
           resourceId: {
-            videoId: "test-video-url-2",
+            videoId: "/test-video-url-2",
           },
         },
       },

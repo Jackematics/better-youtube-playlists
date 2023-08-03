@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     colors: {
       "background-dark-blue": "#011F4B",
-      "container-dark-blue": "#03396C",
+      "container-dark-blue": "#083158",
       "container-light-blue": "#005B96",
       "select-highlight-blue": "#D0E5F5",
       "hover-highlight-blue": "#B3CDE0",
