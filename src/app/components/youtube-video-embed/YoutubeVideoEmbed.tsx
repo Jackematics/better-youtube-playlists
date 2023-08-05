@@ -2,7 +2,7 @@ import { PlaylistItem } from "@/app/types/youtube-playlist-items-types";
 import Image from "next/image";
 
 type YoutubeVideoEmbedProps = {
-  selectedPlaylistItem: PlaylistItem;
+  selectedPlaylistItem: PlaylistItem | undefined;
 };
 
 const YoutubeVideoEmbed = ({
@@ -14,7 +14,8 @@ const YoutubeVideoEmbed = ({
         <iframe
           width={608}
           height={416}
-          src={`https://www.youtube.com/embed/${selectedPlaylistItem.videoId}`}
+          src={`https://www.youtube.com/embed/${selectedPlaylistItem.videoId}?autoplay=1`}
+          allowFullScreen
           title={selectedPlaylistItem.title}
         />
       ) : (

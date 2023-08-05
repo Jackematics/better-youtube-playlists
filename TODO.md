@@ -20,10 +20,8 @@ An improved user experience for anyone who likes to listen to music using Youtub
   - (Stretch) Should show an error message if the user tries to add more than X playlists
 - Select playlist
   - Should populate the playlist description and playlist items :white_check_mark:
-  - Should reset youtube video iframe to default
 - Cache: should cache playlist list data so users returning to the site will automatically have playlists loaded
 - Complete metadata fetch validation
-- (Stretch) If playlists reach a max number implement a scroll
 
 ### Playlist Items
 
@@ -32,15 +30,17 @@ An improved user experience for anyone who likes to listen to music using Youtub
 - List playlist items of selected playlist :white_check_mark:
   - Item number, thumbnail, video title :white_check_mark:
 - Scroll through items :white_check_mark:
-- Selecting an item highlights it
+- Selecting an item highlights it :white_check_mark:
 - Playlist titles beyond a certain character length move to the next line :white_check_mark:
 - Validate items fetch
+- Load more than 50 items on playlist select
 
 ### Video Player
 
-- Default: show a graphic and prompt to add a playlist and select an item :white_check_mark:
-- On playlist item select: display and play video corresponding to selected item
-- On video end: move to the next playlist item
+- Default: show a graphic :white_check_mark:
+- On playlist select: Play the first video in the list
+- On playlist item select: display and play video corresponding to selected item :white_check_mark:
+- On video end: move to the next playlist item which also focuses it
 - On playlist end: stop
 
 ### Playlist Details
