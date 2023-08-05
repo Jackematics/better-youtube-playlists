@@ -22,6 +22,7 @@ An improved user experience for anyone who likes to listen to music using Youtub
   - Should populate the playlist description and playlist items :white_check_mark:
 - Cache: should cache playlist list data so users returning to the site will automatically have playlists loaded
 - Complete metadata fetch validation
+- Option to delete playlists
 
 ### Playlist Items
 
@@ -32,6 +33,7 @@ An improved user experience for anyone who likes to listen to music using Youtub
 - Scroll through items :white_check_mark:
 - Selecting an item highlights it :white_check_mark:
 - Playlist titles beyond a certain character length move to the next line :white_check_mark:
+- Selecting an item scrolls that item to the middle of the container :white_check_mark:
 - Validate items fetch
 - Load more than 50 items on playlist select
 
@@ -40,7 +42,7 @@ An improved user experience for anyone who likes to listen to music using Youtub
 - Default: show a graphic :white_check_mark:
 - On playlist select: Play the first video in the list :white_check_mark:
 - On playlist item select: display and play video corresponding to selected item :white_check_mark:
-- On video end: move to the next playlist item which also focuses it
+- On video end: move to the next playlist item which also focuses it (Not sure how test so didn't) :white_check_mark::innocent:
 - On playlist end: stop
 
 ### Playlist Details

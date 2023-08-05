@@ -38,6 +38,7 @@ const Home = () => {
   const [selectedPlaylistItem, setSelectedPlaylistItem] = useState<
     PlaylistItem | undefined
   >();
+  const [currentVideoEnded, setCurrentVideoEnd] = useState<boolean>(false);
 
   const openAddPlaylistModal = (): void => {
     setAddPlaylistModalOpen(true);
@@ -71,6 +72,11 @@ const Home = () => {
 
   const handlePlaylistItemSelect = (playlistItem: PlaylistItem) => {
     setSelectedPlaylistItem(playlistItem);
+    setCurrentVideoEnd(false);
+  };
+
+  const handleVideoEnd = () => {
+    setCurrentVideoEnd(true);
   };
 
   return (
@@ -80,30 +86,26 @@ const Home = () => {
           addPlaylistModalOpen ? "modal-backdrop pointer-events-none" : ""
         }`}
       >
-        <div className="flex-initial min-w-[18rem] w-72 h-[56.5rem] bg-container-dark-blue mt-4 mr-4 border-4 relative">
-          <PlaylistList
-            playlistMetadataCollection={playlistMetadataCollection}
-            openAddPlaylistModalCallback={openAddPlaylistModal}
-            selectPlaylistCallback={handleSelectPlaylist}
-          />
-        </div>
+        <PlaylistList
+          playlistMetadataCollection={playlistMetadataCollection}
+          openAddPlaylistModalCallback={openAddPlaylistModal}
+          selectPlaylistCallback={handleSelectPlaylist}
+        />
         <div>
           <div className="flex flex-row">
-            <div className="flex-initial min-w-[38rem] h-[26rem] mt-4 mr-4 relative">
-              <YoutubeVideoEmbed selectedPlaylistItem={selectedPlaylistItem} />
-            </div>
-            <div className="flex-initial w-[40rem] h-[18.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative">
-              <PlaylistDescription
-                selectedPlaylistMetadata={selectedPlaylistMetadata}
-              />
-            </div>
-          </div>
-          <div className="w-[79rem] h-[29.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative overflow-y-scroll">
-            <Playlist
-              selectedPlaylistData={selectedPlaylistData}
-              playlistItemSelectCallback={handlePlaylistItemSelect}
+            <YoutubeVideoEmbed
+              selectedPlaylistItem={selectedPlaylistItem}
+              videoEndCallback={handleVideoEnd}
+            />
+            <PlaylistDescription
+              selectedPlaylistMetadata={selectedPlaylistMetadata}
             />
           </div>
+          <Playlist
+            selectedPlaylistData={selectedPlaylistData}
+            currentVideoEnded={currentVideoEnded}
+            playlistItemSelectCallback={handlePlaylistItemSelect}
+          />
         </div>
       </div>
       <div

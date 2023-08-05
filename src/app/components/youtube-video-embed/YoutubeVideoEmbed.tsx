@@ -4,6 +4,7 @@ import Youtube from "react-youtube";
 
 type YoutubeVideoEmbedProps = {
   selectedPlaylistItem: PlaylistItem | undefined;
+  videoEndCallback: () => void;
 };
 
 const youtubeEmbedOptions = {
@@ -17,30 +18,34 @@ const youtubeEmbedOptions = {
 
 const YoutubeVideoEmbed = ({
   selectedPlaylistItem,
+  videoEndCallback,
 }: YoutubeVideoEmbedProps) => {
   return (
     <>
-      {selectedPlaylistItem ? (
-        <div data-testid={selectedPlaylistItem.title}>
-          <Youtube
-            videoId={selectedPlaylistItem.videoId}
-            opts={youtubeEmbedOptions}
-          />
-        </div>
-      ) : (
-        <div
-          title={"video-placeholder"}
-          className="w-[38rem] h-[26rem] bg-black grid place-items-center"
-        >
-          <Image
-            src="/assets/logos/jackematica-logo.svg"
-            alt={"page-logo"}
-            width={210}
-            height={210}
-            priority
-          />
-        </div>
-      )}
+      <div className="flex-initial min-w-[38rem] h-[26rem] mt-4 mr-4 relative">
+        {selectedPlaylistItem ? (
+          <div data-testid={selectedPlaylistItem.title}>
+            <Youtube
+              videoId={selectedPlaylistItem.videoId}
+              opts={youtubeEmbedOptions}
+              onEnd={videoEndCallback}
+            />
+          </div>
+        ) : (
+          <div
+            title={"video-placeholder"}
+            className="w-[38rem] h-[26rem] bg-black grid place-items-center"
+          >
+            <Image
+              src="/assets/logos/jackematica-logo.svg"
+              alt={"page-logo"}
+              width={210}
+              height={210}
+              priority
+            />
+          </div>
+        )}
+      </div>
     </>
   );
 };
