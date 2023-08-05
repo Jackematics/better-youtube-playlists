@@ -1,8 +1,18 @@
 import { PlaylistItem } from "@/app/types/youtube-playlist-items-types";
 import Image from "next/image";
+import Youtube from "react-youtube";
 
 type YoutubeVideoEmbedProps = {
   selectedPlaylistItem: PlaylistItem | undefined;
+};
+
+const youtubeEmbedOptions = {
+  width: 608,
+  height: 416,
+  playerVars: {
+    autoplay: 1,
+  },
+  allow: "autoplay",
 };
 
 const YoutubeVideoEmbed = ({
@@ -11,14 +21,12 @@ const YoutubeVideoEmbed = ({
   return (
     <>
       {selectedPlaylistItem ? (
-        <iframe
-          width={608}
-          height={416}
-          src={`https://www.youtube.com/embed/${selectedPlaylistItem.videoId}?autoplay=1`}
-          allowFullScreen
-          title={selectedPlaylistItem.title}
-          allow="autoplay"
-        />
+        <div data-testid={selectedPlaylistItem.title}>
+          <Youtube
+            videoId={selectedPlaylistItem.videoId}
+            opts={youtubeEmbedOptions}
+          />
+        </div>
       ) : (
         <div
           title={"video-placeholder"}

@@ -44,7 +44,7 @@ describe("YoutubeVideoEmbed", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTitle("Test Song 1")).toBeInTheDocument();
+      expect(screen.getByTestId("Test Song 1")).toBeInTheDocument();
     });
   });
 
@@ -60,7 +60,7 @@ describe("YoutubeVideoEmbed", () => {
     await act(() => fireEvent.click(playlistLiElement));
 
     await waitFor(() => {
-      expect(screen.getByTitle("Test Song 2")).toBeInTheDocument();
+      expect(screen.getByTestId("Test Song 2")).toBeInTheDocument();
     });
   });
 });

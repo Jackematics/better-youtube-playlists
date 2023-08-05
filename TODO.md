@@ -38,7 +38,7 @@ An improved user experience for anyone who likes to listen to music using Youtub
 ### Video Player
 
 - Default: show a graphic :white_check_mark:
-- On playlist select: Play the first video in the list
+- On playlist select: Play the first video in the list :white_check_mark:
 - On playlist item select: display and play video corresponding to selected item :white_check_mark:
 - On video end: move to the next playlist item which also focuses it
 - On playlist end: stop
