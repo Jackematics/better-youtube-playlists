@@ -3,7 +3,7 @@ import {
   PlaylistItem,
 } from "@/app/types/youtube-playlist-items-types";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type PlaylistProps = {
   selectedPlaylistData: PlaylistData | undefined;
@@ -16,12 +16,17 @@ const Playlist = ({
 }: PlaylistProps) => {
   const [focusedPlaylistItem, setFocusedPlaylistItem] = useState<
     string | undefined
-  >(undefined);
+  >();
 
   const handleSelectPlaylistItem = (playlistItem: PlaylistItem) => {
     setFocusedPlaylistItem(playlistItem.videoId);
     playlistItemSelectCallback(playlistItem);
   };
+
+  useEffect(() => {
+    const firstItem = selectedPlaylistData?.playlistItems![0];
+    firstItem && handleSelectPlaylistItem(firstItem);
+  }, [selectedPlaylistData]);
 
   return (
     <>

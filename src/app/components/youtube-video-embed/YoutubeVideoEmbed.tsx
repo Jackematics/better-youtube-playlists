@@ -17,6 +17,7 @@ const YoutubeVideoEmbed = ({
           src={`https://www.youtube.com/embed/${selectedPlaylistItem.videoId}?autoplay=1`}
           allowFullScreen
           title={selectedPlaylistItem.title}
+          allow="autoplay"
         />
       ) : (
         <div

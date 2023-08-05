@@ -29,10 +29,23 @@ describe("YoutubeVideoEmbed", () => {
     FetchHandler.fetchYoutubePlaylistItemsData = originalFetchPlaylistItemsData;
   });
 
-  it("should have a default background if no video has been selected", () => {
+  it("should have a default background if no playlist has been selected", () => {
     render(<Home />);
 
     expect(screen.getByTitle("video-placeholder")).toBeInTheDocument();
+  });
+
+  it("should select the first playlist item in the playlist when a playlist is selected", async () => {
+    render(<Home />);
+
+    await act(() => addTestPlaylistPath());
+    await act(() => {
+      fireEvent.click(screen.getByText("Test Playlist"));
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTitle("Test Song 1")).toBeInTheDocument();
+    });
   });
 
   it("should set a youtube video with the correct title on song click", async () => {
