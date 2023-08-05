@@ -52,14 +52,12 @@ An improved user experience for anyone who likes to listen to music using Youtub
 
 ### Playlist Operations
 
+- Previous: Move to the previous playlist item
+- Next: Move to the next playlist item
 - Shuffle: At the end of every video
   - Randomly select a new playlist item at the end of every video
   - Move list scroll down to the selected video
 - Loop: At the end of the playlist, loop back to the first video in the playlist
-- Search:
-  - If input blank, return the whole list
-  - If input not blank, return all items in the list that contains a word that matches the input
-  - When a video is selected, reset the search to show the whole list, set the iframe to be the selected video, empty the input box, scroll to selected video in list.
 
 ### Misc
 

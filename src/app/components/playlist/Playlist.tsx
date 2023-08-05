@@ -81,6 +81,7 @@ const Playlist = ({
     <>
       <div
         className="w-[79rem] h-[29.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative overflow-y-scroll"
+        // @ts-ignore
         ref={playlistScrollRef}
       >
         <ul data-testid="playlist" className="flex flex-col pt-3">
