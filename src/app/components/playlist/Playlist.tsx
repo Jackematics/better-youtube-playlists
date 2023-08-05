@@ -38,6 +38,8 @@ const Playlist = ({
   useEffect(() => {
     const firstItem = selectedPlaylistData?.playlistItems![0];
     firstItem && handleSelectPlaylistItem(firstItem, 0);
+    setSelectedPlaylistItemIndex(0);
+    scrollToPlayedItem();
   }, [selectedPlaylistData]);
 
   const selectNextVideo = () => {
@@ -52,30 +54,28 @@ const Playlist = ({
     handleSelectPlaylistItem(playlistItems[nextItemIndex], nextItemIndex);
   };
 
-  const scrollItemToContainerCenter = () => {
+  const scrollToPlayedItem = () => {
     const playlistItemHeight = 51.2;
     const indexMultiplier = selectedPlaylistItemIndex!;
 
-    let scrollCalc = playlistItemHeight * indexMultiplier;
-
-    if (
-      selectedPlaylistItemIndex! ===
-      selectedPlaylistData!.playlistItems!.length - 1
-    ) {
-      scrollCalc = 0;
-    }
-
     if (playlistScrollRef.current) {
-      playlistScrollRef.current.scrollTop = scrollCalc;
+      playlistScrollRef.current.scrollTop =
+        playlistItemHeight * indexMultiplier;
     }
   };
 
   useEffect(() => {
     if (currentVideoEnded && selectedPlaylistItemIndex !== undefined) {
       selectNextVideo();
-      scrollItemToContainerCenter();
+      scrollToPlayedItem();
     }
   }, [currentVideoEnded]);
+
+  useEffect(() => {
+    if (selectedPlaylistItemIndex === 0) {
+      scrollToPlayedItem();
+    }
+  }, [selectedPlaylistItemIndex]);
 
   return (
     <>
