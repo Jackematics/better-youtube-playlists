@@ -42,13 +42,14 @@ An improved user experience for anyone who likes to listen to music using Youtub
 - Default: show a graphic :white_check_mark:
 - On playlist select: Play the first video in the list :white_check_mark:
 - On playlist item select: display and play video corresponding to selected item :white_check_mark:
-- On video end: move to the next playlist item which also focuses it (Not sure how test so didn't) :white_check_mark::innocent:
-- On playlist end: stop
+- On video end: move to the next playlist item which also focuses it (Not sure how to test so didn't) :white_check_mark::innocent:
+- On playlist end: stop :white_check_mark:
 
 ### Playlist Details
 
 - Default: title only, No Playlist Selected :white_check_mark:
 - On playlist selection: Show title, owner and number of videos :white_check_mark:
+- Show the index of the current video in the description :white_check_mark:
 
 ### Playlist Operations
 
@@ -69,5 +70,4 @@ An improved user experience for anyone who likes to listen to music using Youtub
 - Contact details
 - Ads
 - Merged playlists
-- Individual video looping?
 - Keyboard shortcuts if possible

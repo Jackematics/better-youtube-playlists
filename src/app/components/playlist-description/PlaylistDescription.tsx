@@ -2,10 +2,12 @@ import { SelectedPlaylistMetadata } from "@/app/types/youtube-playlist-metadata-
 
 type PlaylistDescriptionProps = {
   selectedPlaylistMetadata: SelectedPlaylistMetadata | undefined;
+  currentVideoIndex: number;
 };
 
 const PlaylistDescription = ({
   selectedPlaylistMetadata,
+  currentVideoIndex,
 }: PlaylistDescriptionProps) => {
   return (
     <>
@@ -30,7 +32,9 @@ const PlaylistDescription = ({
         </p>
         <p className="text-white text-4xl font-semibold text-shadow-black mt-9 ml-5">
           {selectedPlaylistMetadata
-            ? `${selectedPlaylistMetadata.totalResults} videos`
+            ? `Videos: ${currentVideoIndex + 1}/${
+                selectedPlaylistMetadata.totalResults
+              }`
             : ""}
         </p>
       </div>

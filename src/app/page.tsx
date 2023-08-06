@@ -38,7 +38,8 @@ const Home = () => {
   const [selectedPlaylistItem, setSelectedPlaylistItem] = useState<
     PlaylistItem | undefined
   >();
-  const [currentVideoEnded, setCurrentVideoEnd] = useState<boolean>(false);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
+  const [currentVideoEnded, setCurrentVideoEnded] = useState<boolean>(false);
 
   const openAddPlaylistModal = (): void => {
     setAddPlaylistModalOpen(true);
@@ -70,13 +71,17 @@ const Home = () => {
     setSelectedPlaylistData(selectedPlaylist);
   };
 
-  const handlePlaylistItemSelect = (playlistItem: PlaylistItem) => {
+  const handlePlaylistItemSelect = (
+    playlistItem: PlaylistItem,
+    itemIndex: number
+  ) => {
     setSelectedPlaylistItem(playlistItem);
-    setCurrentVideoEnd(false);
+    setCurrentVideoIndex(itemIndex);
+    setCurrentVideoEnded(false);
   };
 
   const handleVideoEnd = () => {
-    setCurrentVideoEnd(true);
+    setCurrentVideoEnded(true);
   };
 
   return (
@@ -99,6 +104,7 @@ const Home = () => {
             />
             <PlaylistDescription
               selectedPlaylistMetadata={selectedPlaylistMetadata}
+              currentVideoIndex={currentVideoIndex}
             />
           </div>
           <Playlist

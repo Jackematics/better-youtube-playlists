@@ -48,7 +48,7 @@ describe("PlaylistDescription", () => {
         "Test Playlist"
       );
       expect(screen.getByText("Test Channel Title")).toBeInTheDocument();
-      expect(screen.getByText("123 videos")).toBeInTheDocument();
+      expect(screen.getByText("Videos: 1/123")).toBeInTheDocument();
       expect(
         screen.queryByText("No Playlist Selected")
       ).not.toBeInTheDocument();

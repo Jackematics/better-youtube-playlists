@@ -8,7 +8,10 @@ import { useEffect, useRef, useState } from "react";
 type PlaylistProps = {
   selectedPlaylistData: PlaylistData | undefined;
   currentVideoEnded: boolean;
-  playlistItemSelectCallback: (playlistItem: PlaylistItem) => void;
+  playlistItemSelectCallback: (
+    playlistItem: PlaylistItem,
+    itemIndex: number
+  ) => void;
 };
 
 const Playlist = ({
@@ -32,7 +35,7 @@ const Playlist = ({
     index: number
   ) => {
     setSelectedPlaylistItemIndex(index);
-    playlistItemSelectCallback(playlistItem);
+    playlistItemSelectCallback(playlistItem, index);
   };
 
   useEffect(() => {
@@ -46,9 +49,11 @@ const Playlist = ({
     const playlistItems = selectedPlaylistData?.playlistItems!;
 
     let nextItemIndex = selectedPlaylistItemIndex! + 1;
-    if (selectedPlaylistItemIndex === playlistItems.length - 1) {
-      nextItemIndex = 0;
-    }
+
+    // 05/08/2023 Uncomment this when adding in the loop operator! Delete comment after 6 months
+    // if (selectedPlaylistItemIndex === playlistItems.length - 1) {
+    //   nextItemIndex = 0;
+    // }
 
     setSelectedPlaylistItemIndex(nextItemIndex);
     handleSelectPlaylistItem(playlistItems[nextItemIndex], nextItemIndex);
@@ -56,16 +61,20 @@ const Playlist = ({
 
   const scrollToPlayedItem = () => {
     const playlistItemHeight = 51.2;
-    const indexMultiplier = selectedPlaylistItemIndex!;
 
     if (playlistScrollRef.current) {
       playlistScrollRef.current.scrollTop =
-        playlistItemHeight * indexMultiplier;
+        playlistItemHeight * selectedPlaylistItemIndex!;
     }
   };
 
   useEffect(() => {
-    if (currentVideoEnded && selectedPlaylistItemIndex !== undefined) {
+    if (
+      currentVideoEnded &&
+      (selectedPlaylistItemIndex !== undefined ||
+        selectedPlaylistItemIndex !==
+          selectedPlaylistData?.playlistItems!.length)
+    ) {
       selectNextVideo();
       scrollToPlayedItem();
     }
@@ -82,7 +91,7 @@ const Playlist = ({
       <div
         className="w-[79rem] h-[29.5rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative overflow-y-scroll"
         // @ts-ignore
-        ref={playlistScrollRef}
+        ref={playlistScrollRef!}
       >
         <ul data-testid="playlist" className="flex flex-col pt-3">
           {selectedPlaylistData?.playlistItems!.map((playlistItem, index) => (
