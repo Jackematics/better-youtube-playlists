@@ -16,6 +16,7 @@ import {
 } from "./types/youtube-playlist-items-types";
 import Playlist from "./components/playlist/Playlist";
 import YoutubeVideoEmbed from "./components/youtube-video-embed/YoutubeVideoEmbed";
+import PlaylistOperations from "./components/playlist-operations/PlaylistOperations";
 
 const Home = () => {
   const [addPlaylistModalOpen, setAddPlaylistModalOpen] =
@@ -40,6 +41,7 @@ const Home = () => {
   >();
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
   const [currentVideoEnded, setCurrentVideoEnded] = useState<boolean>(false);
+  const [prevButtonClicked, setPrevButtonClicked] = useState<boolean>(false);
 
   const openAddPlaylistModal = (): void => {
     setAddPlaylistModalOpen(true);
@@ -78,10 +80,15 @@ const Home = () => {
     setSelectedPlaylistItem(playlistItem);
     setCurrentVideoIndex(itemIndex);
     setCurrentVideoEnded(false);
+    setPrevButtonClicked(false);
   };
 
   const handleVideoEnd = () => {
     setCurrentVideoEnded(true);
+  };
+
+  const handleSelectPreviousPlaylistItem = () => {
+    setPrevButtonClicked(true);
   };
 
   return (
@@ -102,14 +109,22 @@ const Home = () => {
               selectedPlaylistItem={selectedPlaylistItem}
               videoEndCallback={handleVideoEnd}
             />
-            <PlaylistDescription
-              selectedPlaylistMetadata={selectedPlaylistMetadata}
-              currentVideoIndex={currentVideoIndex}
-            />
+            <div className="flex-initial w-[40rem] h-[26rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative">
+              <PlaylistDescription
+                selectedPlaylistMetadata={selectedPlaylistMetadata}
+                currentVideoIndex={currentVideoIndex}
+              />
+              <div className="pt-10 pl-5">
+                <PlaylistOperations
+                  prevPlaylistItemCallback={handleSelectPreviousPlaylistItem}
+                />
+              </div>
+            </div>
           </div>
           <Playlist
             selectedPlaylistData={selectedPlaylistData}
             currentVideoEnded={currentVideoEnded}
+            prevButtonClicked={prevButtonClicked}
             playlistItemSelectCallback={handlePlaylistItemSelect}
           />
         </div>
