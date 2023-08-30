@@ -56,11 +56,6 @@ const Playlist = ({
 
     let nextItemIndex = selectedPlaylistItemIndex! + 1;
 
-    // 05/08/2023 Uncomment this when adding in the loop operator! Delete comment after 6 months
-    // if (selectedPlaylistItemIndex === playlistItems.length - 1) {
-    //   nextItemIndex = 0;
-    // }
-
     setSelectedPlaylistItemIndex(nextItemIndex);
     handleSelectPlaylistItem(playlistItems[nextItemIndex], nextItemIndex);
   };
