@@ -40,8 +40,8 @@ const Home = () => {
     PlaylistItem | undefined
   >();
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
-  const [currentVideoEnded, setCurrentVideoEnded] = useState<boolean>(false);
-  const [prevButtonClicked, setPrevButtonClicked] = useState<boolean>(false);
+  const [playNextVideo, setPlayNextVideo] = useState<boolean>(false);
+  const [playPrevVideo, setPlayPrevVideo] = useState<boolean>(false);
 
   const openAddPlaylistModal = (): void => {
     setAddPlaylistModalOpen(true);
@@ -79,16 +79,16 @@ const Home = () => {
   ) => {
     setSelectedPlaylistItem(playlistItem);
     setCurrentVideoIndex(itemIndex);
-    setCurrentVideoEnded(false);
-    setPrevButtonClicked(false);
+    setPlayNextVideo(false);
+    setPlayPrevVideo(false);
   };
 
-  const handleVideoEnd = () => {
-    setCurrentVideoEnded(true);
+  const handlePlayNextVideo = () => {
+    setPlayNextVideo(true);
   };
 
-  const handleSelectPreviousPlaylistItem = () => {
-    setPrevButtonClicked(true);
+  const handlePlayPrevVideo = () => {
+    setPlayPrevVideo(true);
   };
 
   return (
@@ -107,7 +107,7 @@ const Home = () => {
           <div className="flex flex-row">
             <YoutubeVideoEmbed
               selectedPlaylistItem={selectedPlaylistItem}
-              videoEndCallback={handleVideoEnd}
+              videoEndCallback={handlePlayNextVideo}
             />
             <div className="flex-initial w-[40rem] h-[26rem] min-w-[30rem] bg-container-dark-blue mt-4 border-4 relative">
               <PlaylistDescription
@@ -115,16 +115,19 @@ const Home = () => {
                 currentVideoIndex={currentVideoIndex}
               />
               <div className="pt-10 pl-5">
-                <PlaylistOperations
-                  prevPlaylistItemCallback={handleSelectPreviousPlaylistItem}
-                />
+                {selectedPlaylistMetadata && (
+                  <PlaylistOperations
+                    prevPlaylistItemCallback={handlePlayPrevVideo}
+                    nextPlaylistItemCallback={handlePlayNextVideo}
+                  />
+                )}
               </div>
             </div>
           </div>
           <Playlist
             selectedPlaylistData={selectedPlaylistData}
-            currentVideoEnded={currentVideoEnded}
-            prevButtonClicked={prevButtonClicked}
+            currentVideoEnded={playNextVideo}
+            prevButtonClicked={playPrevVideo}
             playlistItemSelectCallback={handlePlaylistItemSelect}
           />
         </div>

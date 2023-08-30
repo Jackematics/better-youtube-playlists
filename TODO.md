@@ -53,8 +53,8 @@ An improved user experience for anyone who likes to listen to music using Youtub
 
 ### Playlist Operations
 
-- Previous: Move to the previous playlist item
-- Next: Move to the next playlist item
+- Previous: Move to the previous playlist item :white_check_mark:
+- Next: Move to the next playlist item :white_check_mark:
 - Shuffle: At the end of every video
   - Randomly select a new playlist item at the end of every video
   - Move list scroll down to the selected video
@@ -63,6 +63,7 @@ An improved user experience for anyone who likes to listen to music using Youtub
 ### Misc
 
 - Description and Playlist Items shrinks on lower screen sizes
+- Fix skipping through playlist quickly bug
 
 ### Stretch Goals
 
