@@ -117,6 +117,7 @@ const Home = () => {
               <div className="pt-10 pl-5">
                 {selectedPlaylistMetadata && (
                   <PlaylistOperations
+                    data-testid="playlist-operations"
                     prevPlaylistItemCallback={handlePlayPrevVideo}
                     nextPlaylistItemCallback={handlePlayNextVideo}
                   />

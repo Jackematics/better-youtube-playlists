@@ -4,6 +4,7 @@ import {
 } from "@/app/types/youtube-playlist-items-types";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import usePlaylistScroll from "./hooks/usePlaylistScroll";
 
 type PlaylistProps = {
   selectedPlaylistData: PlaylistData | undefined;
@@ -24,13 +25,7 @@ const Playlist = ({
   const [selectedPlaylistItemIndex, setSelectedPlaylistItemIndex] = useState<
     number | undefined
   >();
-  const playlistScrollRef = useRef<HTMLDivElement | undefined>();
-
-  useEffect(() => {
-    if (!playlistScrollRef.current) {
-      playlistScrollRef.current = document.createElement("div");
-    }
-  }, []);
+  const { playlistScrollRef, scrollToPlayedItem } = usePlaylistScroll();
 
   const handleSelectPlaylistItem = (
     playlistItem: PlaylistItem,
@@ -44,7 +39,7 @@ const Playlist = ({
     const firstItem = selectedPlaylistData?.playlistItems![0];
     firstItem && handleSelectPlaylistItem(firstItem, 0);
     setSelectedPlaylistItemIndex(0);
-    scrollToPlayedItem();
+    scrollToPlayedItem(selectedPlaylistItemIndex!);
   }, [selectedPlaylistData]);
 
   const selectPrevVideo = () => {
@@ -70,35 +65,27 @@ const Playlist = ({
     handleSelectPlaylistItem(playlistItems[nextItemIndex], nextItemIndex);
   };
 
-  const scrollToPlayedItem = (indexOffset = 0) => {
-    const playlistItemHeight = 51.2;
-    const scrollOffset = selectedPlaylistItemIndex! + indexOffset;
-
-    if (playlistScrollRef.current) {
-      playlistScrollRef.current.scrollTop = playlistItemHeight * scrollOffset;
-    }
-  };
-
   useEffect(() => {
     if (
       currentVideoEnded &&
       selectedPlaylistItemIndex !== selectedPlaylistData?.playlistItems!.length
     ) {
       selectNextVideo();
-      scrollToPlayedItem();
+      scrollToPlayedItem(selectedPlaylistItemIndex!);
     }
   }, [currentVideoEnded]);
 
   useEffect(() => {
     if (selectedPlaylistItemIndex === 0) {
-      scrollToPlayedItem();
+      scrollToPlayedItem(selectedPlaylistItemIndex!);
     }
   }, [selectedPlaylistItemIndex]);
 
+  // User clicks previous button
   useEffect(() => {
     if (prevButtonClicked && selectedPlaylistItemIndex !== 0) {
       selectPrevVideo();
-      scrollToPlayedItem(-2);
+      scrollToPlayedItem(selectedPlaylistItemIndex!, -2);
     }
   }, [prevButtonClicked]);
 

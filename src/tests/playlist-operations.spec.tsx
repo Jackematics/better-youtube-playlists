@@ -32,12 +32,7 @@ describe("PlaylistOperations", () => {
   it("should not display operations if no playlist is selected", () => {
     render(<Home />);
 
-    expect(
-      screen.queryByTestId("previous-playlist-item-button")
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByTestId("next-playlist-item-button")
-    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId("playlist-operations")).not.toBeInTheDocument();
   });
 
   it("should go to the previous video if the previous button is selected", async () => {
