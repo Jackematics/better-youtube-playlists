@@ -127,8 +127,8 @@ const Home = () => {
           </div>
           <Playlist
             selectedPlaylistData={selectedPlaylistData}
-            currentVideoEnded={playNextVideo}
-            prevButtonClicked={playPrevVideo}
+            nextVideoSelected={playNextVideo}
+            prevVideoSelected={playPrevVideo}
             playlistItemSelectCallback={handlePlaylistItemSelect}
           />
         </div>

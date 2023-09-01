@@ -3,13 +3,13 @@ import {
   PlaylistItem,
 } from "@/app/types/youtube-playlist-items-types";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import usePlaylistScroll from "./hooks/usePlaylistScroll";
 
 type PlaylistProps = {
   selectedPlaylistData: PlaylistData | undefined;
-  currentVideoEnded: boolean;
-  prevButtonClicked: boolean;
+  nextVideoSelected: boolean;
+  prevVideoSelected: boolean;
   playlistItemSelectCallback: (
     playlistItem: PlaylistItem,
     itemIndex: number
@@ -18,8 +18,8 @@ type PlaylistProps = {
 
 const Playlist = ({
   selectedPlaylistData,
-  currentVideoEnded,
-  prevButtonClicked,
+  nextVideoSelected,
+  prevVideoSelected,
   playlistItemSelectCallback,
 }: PlaylistProps) => {
   const [selectedPlaylistItemIndex, setSelectedPlaylistItemIndex] = useState<
@@ -62,13 +62,13 @@ const Playlist = ({
 
   useEffect(() => {
     if (
-      currentVideoEnded &&
+      nextVideoSelected &&
       selectedPlaylistItemIndex !== selectedPlaylistData?.playlistItems!.length
     ) {
       selectNextVideo();
       scrollToPlayedItem(selectedPlaylistItemIndex!);
     }
-  }, [currentVideoEnded]);
+  }, [nextVideoSelected]);
 
   useEffect(() => {
     if (selectedPlaylistItemIndex === 0) {
@@ -78,11 +78,11 @@ const Playlist = ({
 
   // User clicks previous button
   useEffect(() => {
-    if (prevButtonClicked && selectedPlaylistItemIndex !== 0) {
+    if (prevVideoSelected && selectedPlaylistItemIndex !== 0) {
       selectPrevVideo();
       scrollToPlayedItem(selectedPlaylistItemIndex!, -2);
     }
-  }, [prevButtonClicked]);
+  }, [prevVideoSelected]);
 
   return (
     <>
